@@ -1,8 +1,13 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #010613;
+  --foreground: #f8fbff;
+  --color-deep-navy: #032059;
+  --color-purple: #392d7f;
+  --color-electric: #0b4fd9;
+  --color-magenta: #e20756;
+  --section-x: clamp(1.25rem, 4vw, 4rem);
 }
 
 @theme inline {
@@ -12,15 +17,81 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+::selection {
+  background: var(--color-magenta);
+  color: white;
+}
+
+.twix-section {
+  position: relative;
+  padding: clamp(5rem, 10vw, 9rem) var(--section-x);
+}
+
+.twix-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 18% 20%, rgba(11, 79, 217, 0.14), transparent 24rem),
+    radial-gradient(circle at 88% 24%, rgba(226, 7, 86, 0.1), transparent 24rem);
+  opacity: 0.8;
+}
+
+.twix-container {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 80rem);
+  margin-inline: auto;
+}
+
+.twix-eyebrow {
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.twix-input {
+  min-height: 3.25rem;
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.055);
+  padding: 0.85rem 1rem;
+  color: white;
+  outline: none;
+  transition: border-color 160ms ease, background 160ms ease, box-shadow 160ms ease;
+}
+
+.twix-input:focus {
+  border-color: var(--color-electric);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 3px rgba(11, 79, 217, 0.24);
+}
+
+.twix-input option {
+  background: #06102c;
+  color: white;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }

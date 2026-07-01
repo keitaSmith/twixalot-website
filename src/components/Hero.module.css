@@ -1,0 +1,304 @@
+.hero {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  overflow: hidden;
+  background: #020817;
+}
+
+.backgroundVideo {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: 61% 50%;
+  filter: saturate(1.08) contrast(1.04) brightness(0.9);
+  transform-origin: center;
+}
+
+.shadowOverlay,
+.glowOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.shadowOverlay {
+  background:
+    linear-gradient(90deg, rgba(1, 5, 16, 0.9) 0%, rgba(1, 5, 16, 0.7) 28%, rgba(1, 5, 16, 0.18) 48%, transparent 66%),
+    linear-gradient(180deg, rgba(1, 5, 16, 0.18) 0%, transparent 34%, rgba(1, 5, 16, 0.66) 100%);
+}
+
+.glowOverlay {
+  background:
+    radial-gradient(circle at 36% 42%, rgba(57, 45, 127, 0.18), transparent 26rem),
+    radial-gradient(circle at 30% 54%, rgba(226, 7, 86, 0.12), transparent 22rem),
+    radial-gradient(circle at 46% 36%, rgba(11, 79, 217, 0.1), transparent 26rem);
+  mix-blend-mode: screen;
+  opacity: 0.68;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.22;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(circle at 58% 42%, black, transparent 72%);
+}
+
+.circuitLayer {
+  position: absolute;
+  z-index: 3;
+  inset: 12% -8% auto auto;
+  width: min(62vw, 840px);
+  height: min(58vw, 620px);
+  opacity: 0.24;
+  background:
+    linear-gradient(90deg, transparent 0 12%, rgba(255, 255, 255, 0.35) 12% 12.4%, transparent 12.4% 100%),
+    linear-gradient(0deg, transparent 0 26%, rgba(11, 79, 217, 0.6) 26% 26.4%, transparent 26.4% 100%),
+    linear-gradient(90deg, transparent 0 54%, rgba(226, 7, 86, 0.5) 54% 54.3%, transparent 54.3% 100%),
+    linear-gradient(0deg, transparent 0 68%, rgba(255, 255, 255, 0.32) 68% 68.25%, transparent 68.25% 100%);
+  background-size: 180px 180px, 220px 220px, 260px 260px, 150px 150px;
+  filter: drop-shadow(0 0 18px rgba(11, 79, 217, 0.55));
+  mask-image: linear-gradient(90deg, transparent, black 22%, black 68%, transparent);
+}
+
+.serviceReveal {
+  position: absolute;
+  left: clamp(1.25rem, 5vw, 4rem);
+  right: clamp(1.25rem, 5vw, 4rem);
+  top: 50%;
+  z-index: 7;
+  max-width: 72rem;
+  opacity: 0;
+  pointer-events: none;
+  translate: 0 -50%;
+  perspective: 1200px;
+}
+
+.curtain {
+  position: absolute;
+  inset: -18vh -12vw -8vh;
+  z-index: 6;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 78% 72%, rgba(11, 79, 217, 0.12), transparent 30rem),
+    radial-gradient(circle at 22% 76%, rgba(226, 7, 86, 0.1), transparent 28rem),
+    radial-gradient(circle at 58% 42%, rgba(57, 45, 127, 0.1), transparent 34rem),
+    linear-gradient(180deg, rgba(1, 6, 19, 0.78) 0%, #030712 28%, #020817 58%, #010613 100%);
+  box-shadow: 0 -60px 160px rgba(1, 6, 19, 0.75);
+}
+
+.curtain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  opacity: 0.08;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 86px 86px;
+  mask-image: radial-gradient(circle at 65% 35%, black, transparent 70%);
+}
+
+.curtain::after {
+  content: "";
+  position: absolute;
+  inset: -4vh 0 auto;
+  z-index: 4;
+  height: 32vh;
+  background:
+    radial-gradient(ellipse at 18% 100%, rgba(1, 6, 19, 0.95), transparent 54%),
+    radial-gradient(ellipse at 48% 100%, rgba(2, 8, 23, 0.98), transparent 58%),
+    radial-gradient(ellipse at 82% 100%, rgba(3, 7, 18, 0.96), transparent 54%),
+    linear-gradient(180deg, transparent 0%, rgba(1, 6, 19, 0.72) 54%, #010613 100%);
+  filter: blur(20px);
+  opacity: 1;
+}
+
+.inkBlobOne,
+.inkBlobTwo,
+.inkBlobThree {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  border-radius: 44% 56% 52% 48% / 52% 42% 58% 48%;
+  background:
+    radial-gradient(circle at 52% 36%, rgba(3, 32, 89, 0.22), transparent 30%),
+    radial-gradient(circle at 68% 72%, rgba(226, 7, 86, 0.08), transparent 28%),
+    radial-gradient(circle, #020817 0%, #010613 66%, rgba(1, 6, 19, 0) 74%);
+  filter: blur(24px);
+  transform-origin: center bottom;
+}
+
+.inkBlobOne {
+  left: 18%;
+  bottom: -28%;
+  width: 54vw;
+  height: 58vh;
+}
+
+.inkBlobTwo {
+  left: -8%;
+  bottom: -24%;
+  width: 48vw;
+  height: 54vh;
+  border-radius: 58% 42% 46% 54% / 44% 58% 42% 56%;
+}
+
+.inkBlobThree {
+  right: -10%;
+  bottom: -30%;
+  width: 56vw;
+  height: 62vh;
+  border-radius: 48% 52% 60% 40% / 58% 44% 56% 42%;
+}
+
+.revealIntro {
+  position: relative;
+}
+
+.serviceGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-top: clamp(1rem, 2vw, 1.5rem);
+  background: transparent;
+}
+
+.servicePanel {
+  min-height: 12.5rem;
+  padding: clamp(1.1rem, 2vw, 1.5rem);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(11, 79, 217, 0.18), transparent 12rem),
+    linear-gradient(145deg, rgba(5, 13, 36, 0.8), rgba(2, 6, 18, 0.68));
+  backdrop-filter: blur(16px);
+}
+
+.servicePanel h3 {
+  margin-top: 1.5rem;
+  color: #fff;
+  font-size: clamp(1.1rem, 1.55vw, 1.45rem);
+  font-weight: 650;
+  line-height: 1.15;
+}
+
+.servicePanel p {
+  margin-top: 0.8rem;
+  color: rgba(255, 255, 255, 0.66);
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+.serviceNumber {
+  color: rgba(255, 255, 255, 0.38);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.82rem;
+}
+
+.proofRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem 0.8rem;
+  margin-top: 1rem;
+  color: rgba(255, 255, 255, 0.66);
+  font-size: 0.86rem;
+  line-height: 1.7;
+}
+
+@media (max-height: 760px) and (min-width: 768px) {
+  .serviceReveal {
+    max-width: 68rem;
+  }
+
+  .servicePanel {
+    min-height: 10.75rem;
+    padding: 1rem;
+  }
+
+  .servicePanel h3 {
+    margin-top: 1rem;
+    font-size: 1.05rem;
+  }
+
+  .servicePanel p {
+    font-size: 0.8rem;
+    line-height: 1.42;
+  }
+}
+
+.proofRow span:first-child {
+  color: rgba(255, 255, 255, 0.92);
+  font-weight: 650;
+}
+
+.revealBand {
+  position: absolute;
+  z-index: 6;
+  inset: auto 0 0;
+  height: 24svh;
+  background: linear-gradient(180deg, transparent, #010613 72%);
+  pointer-events: none;
+}
+
+@media (max-width: 767px) {
+  .hero {
+    min-height: 100vh;
+  }
+
+  .backgroundVideo {
+    object-position: 64% 50%;
+  }
+
+  .shadowOverlay {
+    background:
+      linear-gradient(90deg, rgba(1, 5, 16, 0.88) 0%, rgba(1, 5, 16, 0.52) 45%, transparent 78%),
+      linear-gradient(180deg, rgba(1, 5, 16, 0.16) 0%, transparent 40%, rgba(1, 5, 16, 0.72) 100%);
+  }
+
+  .circuitLayer {
+    inset: 18% -32% auto auto;
+    width: 100vw;
+    opacity: 0.18;
+  }
+
+  .serviceReveal {
+    position: relative;
+    left: auto;
+    right: auto;
+    top: auto;
+    max-width: none;
+    margin-top: 4rem;
+    translate: none;
+    opacity: 1 !important;
+    pointer-events: auto;
+  }
+
+  .serviceGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .servicePanel {
+    min-height: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .serviceReveal,
+  .serviceReveal * {
+    opacity: 1 !important;
+    pointer-events: auto;
+    transform: none !important;
+  }
+}

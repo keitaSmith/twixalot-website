@@ -45,7 +45,7 @@ export function AboutPreview() {
   );
 
   return (
-    <section ref={section} className={styles.section}>
+    <section ref={section} className={styles.section} data-header-glass-sentinel>
       <div className={styles.atmosphere} aria-hidden="true" />
       <div className={`twix-container ${styles.inner}`}>
         <div data-about-reveal className={styles.portraitFrame}>

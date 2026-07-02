@@ -77,6 +77,27 @@
   opacity: 0.78;
 }
 
+.plain {
+  background: transparent;
+}
+
+.plain::before,
+.plain::after {
+  content: none;
+}
+
+.plain .constellation {
+  right: 50%;
+  top: 50%;
+  width: min(34rem, 94%);
+  opacity: 0.84;
+  transform: translate(50%, -50%);
+}
+
+.plain .hatLine {
+  opacity: 0.72;
+}
+
 @media (max-width: 767px) {
   .constellation {
     right: -12rem;

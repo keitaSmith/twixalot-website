@@ -27,7 +27,7 @@ export default function Home() {
 function Footer() {
   return (
     <footer className="border-t border-white/10 bg-[#01040e] py-12 text-white">
-      <div className="mx-auto grid max-w-7xl gap-10 px-[var(--rail-pad)] lg:grid-cols-[1.2fr_0.8fr_0.8fr]">
+      <div className="twix-container grid gap-10 lg:grid-cols-[1.2fr_0.8fr_0.8fr]">
         <div>
           <Logo />
           <p className="mt-5 max-w-md text-sm leading-7 text-white/58">

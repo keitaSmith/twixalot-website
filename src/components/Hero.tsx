@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
 import { motion } from "motion/react";
@@ -67,6 +68,20 @@ export function Hero() {
       const hatLine = gsap.utils.toArray<SVGPolylineElement>("[data-hat-line]", root.current);
       const leoLine = gsap.utils.toArray<SVGPolylineElement>("[data-leo-line]", root.current);
       const arrowLine = gsap.utils.toArray<SVGPolylineElement>("[data-arrow-line]", root.current);
+      const syncInteractiveLayers = () => {
+        const layerEntries = [
+          { element: copy.current, threshold: 0.28 },
+          { element: reveal.current, threshold: 0.28 },
+          { element: featured.current, threshold: 0.28 },
+          { element: paths.current, threshold: 0.28 },
+          { element: process.current, threshold: 0.28 },
+        ];
+
+        layerEntries.forEach(({ element, threshold }) => {
+          const opacity = Number(gsap.getProperty(element, "opacity"));
+          element?.classList.toggle(styles.interactiveLayer, opacity > threshold);
+        });
+      };
 
       gsap.set(reveal.current, { opacity: 0, pointerEvents: "none" });
       gsap.set(sky.current, { opacity: 0 });
@@ -77,7 +92,7 @@ export function Hero() {
       gsap.set(serviceCards, { opacity: 0, y: 42, rotateX: 8, scale: 0.96 });
       gsap.set(revealParts, { opacity: 0, y: 28 });
       gsap.set(featuredParts, { opacity: 0, y: 38, scale: 1.08 });
-      gsap.set(featuredCards, { opacity: 0, y: 72, scale: 1.12, rotateX: -8, filter: "blur(10px)" });
+      gsap.set(featuredCards, { opacity: 0 });
       gsap.set(pathParts, { opacity: 0, y: 42, scale: 1.08, filter: "blur(10px)" });
       gsap.set(pathCards, { opacity: 0, y: 78, scale: 1.12, rotateX: -8, filter: "blur(12px)" });
       gsap.set(processParts, { opacity: 0, y: 52, scale: 0.96, filter: "blur(10px)" });
@@ -94,6 +109,8 @@ export function Hero() {
           scrub: 0.8,
           pin: true,
           anticipatePin: 1,
+          onUpdate: syncInteractiveLayers,
+          onRefresh: syncInteractiveLayers,
         },
       });
 
@@ -101,7 +118,7 @@ export function Hero() {
         .to(copy.current, { y: -86, opacity: 0, scale: 0.98, duration: 0.34, ease: "power2.out" }, 0)
         .to(video.current, { scale: 1.42, xPercent: 13, duration: 1.22, ease: "none" }, 0)
         .to(circuit.current, { opacity: 0.48, xPercent: -8, duration: 1.05, ease: "none" }, 0.08)
-        .to(reveal.current, { opacity: 1, pointerEvents: "auto", duration: 0.32, ease: "power2.out" }, 0.2)
+        .to(reveal.current, { opacity: 1, duration: 0.32, ease: "power2.out" }, 0.2)
         .to(revealParts, { opacity: 1, y: 0, stagger: 0.08, duration: 0.32, ease: "power2.out" }, 0.28)
         .to(serviceCards, { opacity: 1, y: 0, rotateX: 0, scale: 1, stagger: 0.08, duration: 0.44, ease: "power2.out" }, 0.42)
         .to(reveal.current, { opacity: 1, duration: 0.24, ease: "none" }, 0.9)
@@ -110,9 +127,9 @@ export function Hero() {
         .to(video.current, { opacity: 0, duration: 0.36, ease: "power2.out" }, 1.58)
         .to(reveal.current, { y: -560, scale: 0.9, autoAlpha: 0, filter: "blur(3px)", duration: 0.46, ease: "power1.out" }, 1.24)
         .to(sky.current, { opacity: 1, duration: 0.46, ease: "power2.out" }, 1.52)
-        .to(featured.current, { opacity: 1, scale: 1, y: 0, filter: "blur(0px)", pointerEvents: "auto", duration: 0.7, ease: "power2.out" }, 1.76)
+        .to(featured.current, { opacity: 1, scale: 1, y: 0, filter: "blur(0px)", duration: 0.7, ease: "power2.out" }, 1.76)
         .to(featuredParts, { opacity: 1, y: 0, scale: 1, stagger: 0.08, duration: 0.5, ease: "power2.out" }, 1.84)
-        .to(featuredCards, { opacity: 1, y: 0, scale: 1, rotateX: 0, filter: "blur(0px)", stagger: 0.06, duration: 0.66, ease: "power2.out" }, 2.0)
+        .to(featuredCards, { opacity: 1, stagger: 0.06, duration: 0.66, ease: "power2.out" }, 2.0)
         .to(featured.current, { opacity: 1, duration: 0.34, ease: "none" }, 2.58)
         .to(morphStars, {
           attr: {
@@ -127,8 +144,8 @@ export function Hero() {
         .to(extraMorphStars, { opacity: 0, duration: 0.36, ease: "power1.out" }, 2.98)
         .to(hatLine, { opacity: 0, duration: 0.34, ease: "power1.out" }, 2.76)
         .to(leoLine, { opacity: 0.62, duration: 0.48, ease: "power1.out" }, 2.96)
-        .to(featured.current, { y: -420, opacity: 0, scale: 0.94, filter: "blur(8px)", pointerEvents: "none", duration: 0.58, ease: "power1.inOut" }, 2.86)
-        .to(paths.current, { opacity: 1, scale: 1, y: 0, filter: "blur(0px)", pointerEvents: "auto", duration: 0.72, ease: "power2.out" }, 3.02)
+        .to(featured.current, { y: -420, opacity: 0, scale: 0.94, filter: "blur(8px)", duration: 0.58, ease: "power1.inOut" }, 2.86)
+        .to(paths.current, { opacity: 1, scale: 1, y: 0, filter: "blur(0px)", duration: 0.72, ease: "power2.out" }, 3.02)
         .to(pathParts, { opacity: 1, y: 0, scale: 1, filter: "blur(0px)", stagger: 0.08, duration: 0.48, ease: "power2.out" }, 3.12)
         .to(pathCards, { opacity: 1, y: 0, scale: 1, rotateX: 0, filter: "blur(0px)", stagger: 0.06, duration: 0.72, ease: "power2.out" }, 3.28)
         .to(paths.current, { opacity: 1, duration: 0.36, ease: "none" }, 3.92)
@@ -146,8 +163,8 @@ export function Hero() {
         }, 4.04)
         .to(pathCards, { opacity: 0.24, y: -42, scale: 0.92, rotateX: 7, filter: "blur(3px)", stagger: 0.035, duration: 0.52, ease: "power1.inOut" }, 4.18)
         .to(pathParts, { opacity: 0.24, y: -46, scale: 0.96, filter: "blur(3px)", stagger: 0.04, duration: 0.42, ease: "power1.out" }, 4.24)
-        .to(paths.current, { opacity: 0, y: -160, scale: 0.96, filter: "blur(6px)", pointerEvents: "none", duration: 0.54, ease: "power1.inOut" }, 4.42)
-        .to(process.current, { opacity: 1, scale: 1, y: 0, filter: "blur(0px)", pointerEvents: "auto", duration: 0.72, ease: "power2.out" }, 4.48)
+        .to(paths.current, { opacity: 0, y: -160, scale: 0.96, filter: "blur(6px)", duration: 0.54, ease: "power1.inOut" }, 4.42)
+        .to(process.current, { opacity: 1, scale: 1, y: 0, filter: "blur(0px)", duration: 0.72, ease: "power2.out" }, 4.48)
         .to(processParts, { opacity: 1, y: 0, scale: 1, filter: "blur(0px)", stagger: 0.08, duration: 0.48, ease: "power2.out" }, 4.58)
         .to(processCards, { opacity: 1, y: 0, scale: 1, rotateX: 0, filter: "blur(0px)", stagger: 0.08, duration: 0.68, ease: "power2.out" }, 4.76)
         .to(processNodes, { opacity: 1, scale: 1, stagger: 0.08, duration: 0.36, ease: "power2.out" }, 4.86)
@@ -186,8 +203,8 @@ export function Hero() {
       <div ref={sky} className={styles.nightSky}>
         <ConstellationMorph />
       </div>
-      <div className="relative z-10 mx-auto grid min-h-screen max-w-7xl items-center px-[var(--rail-pad)] pb-16 pt-28 lg:pt-28">
-        <div ref={copy} className="max-w-3xl">
+      <div className={`twix-container relative z-10 grid min-h-screen items-center pb-16 pt-28 lg:pt-28 ${styles.heroContentShell}`}>
+        <div ref={copy} className={`max-w-3xl ${styles.copyContent} ${styles.interactiveLayer}`}>
           <p className="mb-5 inline-flex items-center gap-2 bg-white/[0.055] px-3 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-white/72 backdrop-blur-xl">
             Swiss Software Studio
           </p>
@@ -279,23 +296,40 @@ export function Hero() {
 
           <div className={styles.featuredGrid}>
             {projects.map((project, index) => (
-              <article key={project.name} data-featured-card className={styles.featuredPanel}>
-                <div className="flex items-center justify-between text-xs text-white/40">
-                  <span>0{index + 1}</span>
-                  <span>{project.built}</span>
+              <article
+                key={project.name}
+                data-featured-card
+                className={styles.featuredPanel}
+                tabIndex={0}
+                aria-label={`${project.name} preview. Hover or focus to view the website screenshot.`}
+              >
+                <div className={styles.featuredPanelInner}>
+                  <div className={styles.featuredPanelFace}>
+                    <div className="flex items-center justify-between text-xs text-white/40">
+                      <span>0{index + 1}</span>
+                      <span>{project.built}</span>
+                    </div>
+                    <h3>{project.name}</h3>
+                    <p>{project.description}</p>
+                  </div>
+                  <div className={styles.featuredPanelBack}>
+                    <Image
+                      src={project.image}
+                      alt={`${project.name} website screenshot`}
+                      fill
+                      sizes="(min-width: 1024px) 25vw, 100vw"
+                      className={styles.featuredImage}
+                    />
+                  </div>
                 </div>
-                <h3>{project.name}</h3>
-                <p>{project.description}</p>
-                <a
-                  href={project.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className={styles.featuredButton}
-                >
-                  Visit website
-                </a>
               </article>
             ))}
+          </div>
+          <div data-featured-reveal className={styles.featuredCtaWrap}>
+            <Link href="/work" className={styles.featuredCta}>
+              Take a closer look
+              <ArrowIcon size={18} aria-hidden="true" />
+            </Link>
           </div>
         </div>
       </div>
@@ -353,7 +387,7 @@ export function Hero() {
               Process
             </p>
             <h2 data-process-reveal>
-              A calm route from rough idea to reliable launch.
+              A Calm Route From Rough Idea To Reliable Launch
             </h2>
             <p data-process-reveal>
               A clear process keeps the work creative, structured and manageable — from the first conversation to launch and support.

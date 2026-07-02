@@ -85,9 +85,9 @@ function pointsFrom(order: number[], source: typeof hatStars) {
   return order.map((index) => `${source[index].x},${source[index].y}`).join(" ");
 }
 
-export function ConstellationMorph({ className = "" }: { className?: string }) {
+export function ConstellationMorph({ className = "", variant = "scene" }: { className?: string; variant?: "scene" | "plain" }) {
   return (
-    <div className={`${styles.sky} ${className}`} aria-hidden="true">
+    <div className={`${styles.sky} ${variant === "plain" ? styles.plain : ""} ${className}`} aria-hidden="true">
       <svg className={styles.constellation} viewBox="0 0 600 420" role="img">
         <defs>
           <filter id="constellation-glow" x="-40%" y="-40%" width="180%" height="180%">

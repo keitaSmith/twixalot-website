@@ -1,16 +1,75 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Sparkles } from "lucide-react";
+import { useEffect, useState } from "react";
 import { navItems } from "@/data/site";
 import { Logo } from "./Logo";
 
 export function Header() {
+  const pathname = usePathname();
+  const [isGlassActive, setIsGlassActive] = useState(false);
+
+  useEffect(() => {
+    let frame = 0;
+
+    const updateGlassState = () => {
+      frame = 0;
+
+      if (pathname === "/") {
+        const sentinel = document.querySelector<HTMLElement>("[data-header-glass-sentinel]");
+
+        if (sentinel) {
+          setIsGlassActive(sentinel.getBoundingClientRect().top <= 112);
+          return;
+        }
+      }
+
+      setIsGlassActive(window.scrollY > 20);
+    };
+
+    const requestUpdate = () => {
+      if (frame) {
+        return;
+      }
+
+      frame = window.requestAnimationFrame(updateGlassState);
+    };
+
+    updateGlassState();
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", requestUpdate);
+
+    return () => {
+      if (frame) {
+        window.cancelAnimationFrame(frame);
+      }
+
+      window.removeEventListener("scroll", requestUpdate);
+      window.removeEventListener("resize", requestUpdate);
+    };
+  }, [pathname]);
+
+  const pillState = isGlassActive ? "twx-pill-active" : "twx-pill-idle";
+  const ctaState = isGlassActive ? "twx-pill-active" : "twx-pill-cta-idle";
+
   return (
-    <header className="fixed left-0 top-0 z-50 w-full bg-transparent transition-all duration-500">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-[var(--rail-pad)] py-5 sm:py-6">
-        <Logo priority />
-        <nav className="hidden items-center gap-8 text-sm font-medium text-white/76 lg:flex">
+    <header
+      className="fixed left-0 top-0 z-50 w-full bg-transparent transition-all duration-500"
+      data-glass-active={isGlassActive}
+    >
+      <div
+        className={`twix-container flex items-center justify-between transition-[padding] duration-500 ${
+          isGlassActive ? "py-4" : "py-5 sm:py-6"
+        }`}
+      >
+        <Logo priority className={`twx-refractive-pill twx-header-logo-pill ${pillState}`} />
+        <nav
+          className={`twx-refractive-pill twx-header-nav-pill hidden items-center gap-8 text-sm font-medium transition-all duration-500 lg:flex ${pillState} ${
+            isGlassActive ? "text-white/82" : "text-white/76"
+          }`}
+        >
           {navItems.map((item) => (
             <Link
               key={item.href}
@@ -23,7 +82,7 @@ export function Header() {
         </nav>
         <Link
           href="/contact"
-          className="inline-flex min-h-11 items-center gap-2 bg-white/95 px-4 text-sm font-semibold text-[#03143c] shadow-[0_14px_40px_rgba(0,0,0,0.18)] transition hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-magenta)]"
+          className={`twx-refractive-pill twx-header-cta-pill inline-flex min-h-11 items-center gap-2 px-4 text-sm font-semibold transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-magenta)] ${ctaState}`}
         >
           <Sparkles aria-hidden="true" size={16} />
           <span className="hidden sm:inline">Start a project</span>

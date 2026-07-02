@@ -83,73 +83,100 @@ export const heroServiceCards = [
 export const projects = [
   {
     name: "Animae Caribe",
-    description: "Responsive website experience for a creative cultural platform.",
+    description: "Responsive website experience for a Caribbean animation and creative community platform.",
     built: "Modernised content workflow",
-    stack: "Next.js, CMS planning, responsive UI",
+    stack: "Next.js, responsive UI, content structure",
+    url: "https://www.animaecaribe.com/",
   },
   {
-    name: "Pride TT",
-    description: "Digital presence for community storytelling and campaign content.",
-    built: "Improved publishing structure",
-    stack: "Website, content architecture, forms",
-  },
-  {
-    name: "TTCSI / NSEP",
-    description: "Structured platform work for programme information and access.",
-    built: "Custom platform build",
-    stack: "Web app, dashboards, integrations",
-  },
-  {
-    name: "PMATT",
-    description: "Professional association website with clearer navigation.",
+    name: "Zoltan Hair Zurich",
+    description: "Premium salon website for a Zurich-based hairstylist and colour specialist.",
     built: "Responsive website experience",
-    stack: "CMS, membership content, UX",
+    stack: "Website, booking path, local SEO",
+    url: "https://www.zoltanhairzurich.ch/",
   },
   {
-    name: "QICU",
-    description: "Information-led web experience with practical content paths.",
-    built: "Improved publishing structure",
-    stack: "Website, content model, support",
+    name: "hirning.ch",
+    description: "Professional web presence for project management training and consulting.",
+    built: "CMS-driven content system",
+    stack: "Website, content model, responsive UI",
+    url: "https://hirning.ch/",
   },
   {
-    name: "Live Well Eat Smart",
-    description: "Wellness brand web presence with flexible content areas.",
-    built: "Modernised content workflow",
-    stack: "Website, CMS, visual direction",
+    name: "psott.co",
+    description: "Digital platform for private sector representation, updates and member communication.",
+    built: "CMS-driven content system",
+    stack: "Website, CMS, publishing structure",
+    url: "https://psott.co/",
+  },
+  {
+    name: "PrideTT",
+    description: "Community website for Trinidad and Tobago's annual LGBTQI+ Pride celebrations.",
+    built: "Responsive website experience",
+    stack: "Website, content architecture, events",
+    url: "https://pridett.com/",
+  },
+  {
+    name: "QueerTT",
+    description: "Community-focused web presence for queer visibility, information and support.",
+    built: "Responsive website experience",
+    stack: "Website, content structure, community UX",
+    url: "https://queertt.com/",
   },
 ];
 
 export const startingPoints = [
   {
-    title: "Website Sprint",
+    title: "Launch Website",
     description:
-      "Focused website or landing page build for small launches, campaigns or early-stage businesses.",
-    price: "From CHF ___",
+      "A focused website or landing page for a small business, campaign, event or early-stage idea that needs to look credible fast.",
+    price: "From CHF 2’900",
   },
   {
-    title: "Premium Website",
+    title: "Signature Website",
     description:
-      "Custom branded website with stronger visual direction, responsive frontend and launch support.",
-    price: "From CHF ___",
+      "A custom branded website with stronger visual direction, responsive design, polished interactions and launch support.",
+    price: "From CHF 6’900",
   },
   {
-    title: "CMS Platform",
+    title: "Content Platform",
     description:
-      "Content-managed website for teams that need to manage pages, news, events, media or people.",
-    price: "From CHF ___",
+      "A content-managed website for teams that need to update pages, news, events, media, people or resources without relying on a developer for every change.",
+    price: "From CHF 9’500",
   },
   {
-    title: "Custom Web App",
+    title: "Custom System",
     description:
-      "Dashboards, portals, booking flows, internal systems or workflow tools.",
+      "Dashboards, portals, booking flows, internal tools and workflow systems designed around how your organisation actually works.",
     price: "Scoped after discovery",
   },
   {
-    title: "Monthly Care",
+    title: "Care & Support",
     description:
-      "Ongoing updates, fixes, content support, performance checks and technical maintenance.",
-    price: "From CHF ___ / month",
+      "Ongoing updates, small fixes, technical checks, content support and improvements after launch. Hosting, domains and third-party services remain client-owned and billed directly.",
+    price: "From CHF 290 / month",
   },
+];
+
+export const techStack = [
+  "Next.js",
+  "React",
+  "TypeScript",
+  "Node.js",
+  "Tailwind CSS",
+  "GSAP",
+  "Sanity",
+  "WordPress",
+  "PostgreSQL",
+  "MySQL",
+  "MongoDB",
+  "Firebase",
+  "React Native",
+  "Flutter",
+  "GraphQL",
+  "Docker",
+  "Vercel",
+  "GitHub",
 ];
 
 export const processSteps = [

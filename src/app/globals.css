@@ -7,7 +7,20 @@
   --color-purple: #392d7f;
   --color-electric: #0b4fd9;
   --color-magenta: #e20756;
-  --section-x: clamp(1.25rem, 4vw, 4rem);
+  --rail-width: 80rem;
+  --rail-pad: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --rail-pad: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --rail-pad: 2rem;
+  }
 }
 
 @theme inline {
@@ -34,7 +47,7 @@ html {
 
 .twix-section {
   position: relative;
-  padding: clamp(5rem, 10vw, 9rem) var(--section-x);
+  padding-block: clamp(5rem, 10vw, 9rem);
 }
 
 .twix-section::before {
@@ -51,8 +64,9 @@ html {
 .twix-container {
   position: relative;
   z-index: 1;
-  width: min(100%, 80rem);
+  width: min(100%, var(--rail-width));
   margin-inline: auto;
+  padding-inline: var(--rail-pad);
 }
 
 .twix-eyebrow {

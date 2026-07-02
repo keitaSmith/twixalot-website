@@ -7,7 +7,7 @@ export default function ContactPage() {
       <div className="mx-auto grid max-w-5xl gap-10 lg:grid-cols-[0.8fr_1.2fr]">
         <div>
           <p className="twix-eyebrow">Contact</p>
-          <h1 className="mt-5 text-5xl font-semibold">Start a project</h1>
+          <h1 className="mt-5 text-5xl font-semibold">Start A Project</h1>
           <p className="mt-5 text-white/64">Share the shape of the work and Twixalot can take it from there.</p>
           <Link href="/" className="mt-8 inline-flex text-white underline decoration-[var(--color-magenta)] decoration-2 underline-offset-8">
             Back home

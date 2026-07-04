@@ -4,22 +4,17 @@ import {
   Braces,
   Cable,
   CircleCheck,
-  DraftingCompass,
   Handshake,
   LayoutDashboard,
   LifeBuoy,
   MonitorSmartphone,
-  PenTool,
-  Rocket,
-  Search,
-  Settings2,
   Sparkles,
 } from "lucide-react";
 
 export const navItems = [
   { label: "Work", href: "/work" },
   { label: "Services", href: "/services" },
-  { label: "Process", href: "/process" },
+  { label: "Pricing", href: "/pricing" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
@@ -184,39 +179,6 @@ export const techStack = [
   "GitHub",
 ];
 
-export const processSteps = [
-  {
-    title: "Discover",
-    description: "Goals, audience, requirements",
-    icon: Search,
-  },
-  {
-    title: "Structure",
-    description: "Sitemap, user flows, content model",
-    icon: DraftingCompass,
-  },
-  {
-    title: "Design",
-    description: "Visual direction and interface planning",
-    icon: PenTool,
-  },
-  {
-    title: "Build",
-    description: "Development, CMS and integrations",
-    icon: Braces,
-  },
-  {
-    title: "Launch",
-    description: "Testing, deployment and handover",
-    icon: Rocket,
-  },
-  {
-    title: "Support",
-    description: "Fixes, improvements and maintenance",
-    icon: Settings2,
-  },
-];
-
 export const whyTwixalot = [
   { title: "Premium visual execution", icon: Sparkles },
   { title: "Clear communication", icon: Handshake },
@@ -227,27 +189,30 @@ export const whyTwixalot = [
 ];
 
 export const projectTypes = [
-  "Website / redesign",
-  "Web app / platform",
-  "CMS / content system",
-  "Automation / integration",
-  "Maintenance / support",
+  "Launch Website",
+  "Signature Website",
+  "Content Platform",
+  "Custom System",
+  "Care and Support",
   "Not sure yet",
 ];
 
 export const budgetRanges = [
-  "Under CHF 3k",
-  "CHF 3k-8k",
-  "CHF 8k-15k",
-  "CHF 15k+",
-  "Need guidance",
+  "Under CHF 2\u2019900",
+  "CHF 2\u2019900 to CHF 6\u2019900",
+  "CHF 6\u2019900 to CHF 9\u2019500",
+  "CHF 9\u2019500 to CHF 15\u2019000",
+  "CHF 15\u2019000 to CHF 25\u2019000",
+  "CHF 25\u2019000+",
+  "Calculator estimate attached",
+  "Not sure yet",
 ];
 
 export const timelineOptions = [
-  "As soon as possible",
-  "1-2 months",
-  "3-6 months",
   "Flexible",
+  "Standard priority",
+  "Rush or urgent",
+  "Not sure yet",
 ];
 
 export const ArrowIcon = ArrowRight;

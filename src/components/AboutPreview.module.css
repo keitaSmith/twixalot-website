@@ -54,12 +54,20 @@
 
 .portraitFrame {
   position: relative;
+  isolation: isolate;
   max-width: 31rem;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.045);
+  padding: 0.75rem;
+  box-shadow: 0 34px 110px rgba(0, 0, 0, 0.34);
 }
 
 .portraitGlow {
   position: absolute;
   inset: 8% -8% -8% 12%;
+  z-index: 0;
   pointer-events: none;
   background:
     radial-gradient(circle at 30% 20%, rgba(226, 7, 86, 0.16), transparent 18rem),
@@ -69,13 +77,11 @@
 
 .portrait {
   position: relative;
+  z-index: 1;
   overflow: hidden;
   aspect-ratio: 4 / 5;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background:
-    radial-gradient(circle at 40% 20%, rgba(255, 255, 255, 0.08), transparent 12rem),
-    #030712;
-  box-shadow: 0 34px 110px rgba(0, 0, 0, 0.34);
+  border-radius: 6px;
+  background: #050b1d;
 }
 
 .portrait::after {

@@ -148,7 +148,9 @@ html {
     backdrop-filter 620ms ease,
     -webkit-backdrop-filter 620ms ease,
     color 260ms ease,
+    margin 620ms ease,
     opacity 620ms ease,
+    padding 620ms ease,
     transform 620ms ease;
 }
 
@@ -238,10 +240,21 @@ html {
 }
 
 .twx-header-logo-pill {
-  padding: 0.62rem 1rem;
+  border-width: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .twx-header-nav-pill {
+  padding: 0;
+}
+
+.twx-pill-active.twx-header-logo-pill {
+  margin: -0.62rem -1rem;
+  padding: 0.62rem 1rem;
+}
+
+.twx-pill-active.twx-header-nav-pill {
   gap: clamp(1rem, 2vw, 1.65rem);
   padding: 0.76rem 1.12rem;
 }

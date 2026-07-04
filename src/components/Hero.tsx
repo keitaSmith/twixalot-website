@@ -27,7 +27,8 @@ import {
   SiVercel,
   SiWordpress,
 } from "react-icons/si";
-import { ArrowIcon, heroServiceCards, processSteps, projects, startingPoints, techStack } from "@/data/site";
+import { processOverview, processSteps } from "@/data/processSteps";
+import { ArrowIcon, heroServiceCards, projects, startingPoints, techStack } from "@/data/site";
 import { ConstellationMorph } from "./ConstellationMorph";
 import styles from "./Hero.module.css";
 
@@ -226,10 +227,10 @@ export function Hero() {
             </motion.div>
             <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
               <Link
-                href="/work"
+                href="/pricing#pricing-calculator"
                 className="inline-flex min-h-13 items-center justify-center border border-white/18 px-6 font-semibold text-white transition hover:border-white/42 hover:bg-white/[0.06] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-electric)]"
               >
-                View the work
+                Get an estimate
               </Link>
             </motion.div>
           </div>
@@ -365,6 +366,16 @@ export function Hero() {
             Final pricing depends on scope, timeline, integrations, content needs and support requirements.
           </p>
 
+          <div data-path-reveal className="mt-6">
+            <Link
+              href="/pricing#pricing-calculator"
+              className="inline-flex min-h-12 items-center justify-center gap-2 bg-white px-5 font-semibold text-[#03143c] transition hover:bg-[#e8eeff] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-magenta)]"
+            >
+              Estimate your project
+              <ArrowIcon size={18} aria-hidden="true" />
+            </Link>
+          </div>
+
           <div data-path-reveal className={styles.stackMarquee} aria-label="Technology stack">
             <div className={styles.stackTrack}>
               {[...techStack, ...techStack].map((item, index) => {
@@ -384,13 +395,13 @@ export function Hero() {
         <div className={styles.processContent}>
           <div className={styles.processIntro}>
             <p data-process-reveal className="twix-eyebrow">
-              Process
+              {processOverview.label}
             </p>
             <h2 data-process-reveal>
-              A Calm Route From Rough Idea To Reliable Launch
+              {processOverview.heading}
             </h2>
             <p data-process-reveal>
-              A clear process keeps the work creative, structured and manageable — from the first conversation to launch and support.
+              {processOverview.intro}
             </p>
           </div>
 

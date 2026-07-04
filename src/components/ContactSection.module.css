@@ -94,3 +94,38 @@
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 767px) {
+  .section {
+    padding-block: 5rem;
+  }
+
+  .inner {
+    gap: 2.5rem;
+    padding-inline: calc(var(--rail-pad) * 2);
+  }
+
+  .copy,
+  .copy h2 {
+    max-width: none;
+  }
+
+  .copy h2 {
+    font-size: 1.5rem;
+    line-height: 1.12;
+  }
+
+  .section :global(.twix-eyebrow) {
+    font-size: 0.72rem !important;
+    letter-spacing: 0.16em !important;
+  }
+
+  .copy p:not(.twix-eyebrow) {
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  .formShell {
+    padding: 1.2rem;
+  }
+}

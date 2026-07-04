@@ -701,20 +701,63 @@
 @media (max-width: 767px) {
   .hero {
     min-height: 100vh;
-  }
-
-  .backgroundVideo {
-    object-position: 64% 50%;
+    overflow: visible;
+    background:
+      radial-gradient(circle at 18% 8%, rgba(226, 7, 86, 0.18), transparent 17rem),
+      radial-gradient(circle at 92% 18%, rgba(11, 79, 217, 0.2), transparent 18rem),
+      linear-gradient(180deg, #010613 0%, #03102c 46%, #010613 100%);
   }
 
   .shadowOverlay {
     background:
-      linear-gradient(90deg, rgba(1, 5, 16, 0.88) 0%, rgba(1, 5, 16, 0.52) 45%, transparent 78%),
-      linear-gradient(180deg, rgba(1, 5, 16, 0.16) 0%, transparent 40%, rgba(1, 5, 16, 0.72) 100%);
+      linear-gradient(180deg, rgba(1, 5, 16, 0.18) 0%, transparent 28%, rgba(1, 5, 16, 0.42) 100%);
+  }
+
+  .glowOverlay,
+  .curtain,
+  .revealBand {
+    display: none;
   }
 
   .circuitLayer {
     display: none;
+  }
+
+  .heroContentShell {
+    min-height: auto;
+    padding-bottom: 0;
+  }
+
+  .copyContent {
+    width: 100%;
+    max-width: none;
+    padding-bottom: 1rem;
+  }
+
+  .hero :global(.twix-eyebrow) {
+    font-size: 0.72rem !important;
+    letter-spacing: 0.16em !important;
+  }
+
+  .copyContent > p:first-child {
+    display: block;
+    width: fit-content;
+    background: transparent;
+    padding: 0;
+    color: rgba(255, 255, 255, 0.62);
+    font-size: 0.72rem !important;
+    letter-spacing: 0.16em !important;
+    backdrop-filter: none;
+  }
+
+  .copyContent h1 {
+    font-size: 2rem;
+    line-height: 1.08;
+  }
+
+  .copyContent p:not(.twix-eyebrow) {
+    font-size: 1rem;
+    line-height: 1.8;
   }
 
   .serviceReveal {
@@ -722,20 +765,58 @@
     left: auto;
     right: auto;
     top: auto;
-    max-width: none;
+    width: min(100%, var(--rail-width));
     margin-top: 4rem;
+    padding-inline: 0;
     translate: none;
     opacity: 1 !important;
     pointer-events: auto;
     visibility: visible;
   }
 
+  .revealIntro h2 {
+    font-size: 1.5rem;
+    line-height: 1.12;
+  }
+
+  .revealIntro p:not(.twix-eyebrow) {
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  .serviceReveal *,
+  .pathReveal *,
+  .processReveal * {
+    opacity: 1 !important;
+    filter: none !important;
+  }
+
+  .copyContent a,
+  .serviceReveal a,
+  .pathReveal a,
+  .featuredReveal a,
+  .processReveal a {
+    width: 100%;
+    min-height: 3.25rem;
+    pointer-events: auto;
+  }
+
   .serviceGrid {
     grid-template-columns: 1fr;
+    gap: 0.9rem;
   }
 
   .servicePanel {
     min-height: auto;
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    background:
+      radial-gradient(circle at 100% 0%, rgba(11, 79, 217, 0.24), transparent 13rem),
+      linear-gradient(145deg, rgba(8, 20, 54, 0.94), rgba(3, 10, 29, 0.9));
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.26);
+  }
+
+  .servicePanel p {
+    color: rgba(255, 255, 255, 0.72);
   }
 
   .featuredReveal {
@@ -750,7 +831,7 @@
     position: relative;
     inset: auto;
     z-index: 9;
-    margin-top: 4rem;
+    margin-top: 4.75rem;
     opacity: 1 !important;
     pointer-events: auto;
     visibility: visible;
@@ -763,18 +844,68 @@
     left: auto;
     right: auto;
     top: auto;
-    width: auto;
-    padding-inline: 1.25rem;
-    padding-bottom: 4rem;
+    width: min(100%, var(--rail-width));
+    padding-inline: calc(var(--rail-pad) * 2);
+    padding-block: 1.25rem 4.5rem;
     translate: none;
   }
 
   .pathGrid {
     grid-template-columns: 1fr;
+    gap: 0.9rem;
+    margin-top: 1.4rem;
+  }
+
+  .pathHeading h2,
+  .processIntro h2 {
+    font-size: 1.5rem;
+    line-height: 1.12;
+  }
+
+  .pathNote {
+    margin-top: 1.15rem;
+    font-size: 0.94rem;
+    color: rgba(255, 255, 255, 0.66);
   }
 
   .pathPanel {
     min-height: auto;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background:
+      radial-gradient(circle at 15% 0%, rgba(226, 7, 86, 0.16), transparent 13rem),
+      radial-gradient(circle at 95% 100%, rgba(11, 79, 217, 0.18), transparent 13rem),
+      linear-gradient(155deg, rgba(8, 20, 54, 0.96), rgba(3, 10, 29, 0.92));
+    padding: 1.2rem;
+    box-shadow: 0 18px 52px rgba(0, 0, 0, 0.28);
+  }
+
+  .pathPanelTop {
+    font-size: 0.76rem;
+  }
+
+  .pathPanel h3 {
+    margin-top: 2.1rem;
+    font-size: 1.22rem;
+  }
+
+  .pathPanel p {
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.72);
+  }
+
+  .stackMarquee {
+    margin-top: 1.25rem;
+  }
+
+  .stackTrack {
+    gap: 2.2rem;
+    animation: marquee 28s linear infinite;
+  }
+
+  .stackItem {
+    font-size: 0.9rem;
+    letter-spacing: 0.08em;
   }
 
   .processReveal {
@@ -793,18 +924,28 @@
     left: auto;
     right: auto;
     top: auto;
-    width: auto;
-    padding-inline: 1.25rem;
+    width: min(100%, var(--rail-width));
+    padding-inline: calc(var(--rail-pad) * 2);
     padding-bottom: 4rem;
     translate: none;
   }
 
   .processGrid {
     grid-template-columns: 1fr;
+    gap: 0.9rem;
   }
 
   .processPanel {
     min-height: auto;
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    background:
+      radial-gradient(circle at 18% 0%, rgba(11, 79, 217, 0.18), transparent 11rem),
+      linear-gradient(155deg, rgba(8, 20, 54, 0.94), rgba(3, 10, 29, 0.9));
+    box-shadow: 0 18px 52px rgba(0, 0, 0, 0.26);
+  }
+
+  .processPanel p {
+    color: rgba(255, 255, 255, 0.72);
   }
 }
 

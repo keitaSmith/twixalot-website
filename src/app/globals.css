@@ -129,6 +129,22 @@ html {
   padding-inline: var(--rail-pad);
 }
 
+@media (max-width: 767px) {
+  .twix-container {
+    padding-inline: calc(var(--rail-pad) * 2);
+  }
+
+  main h1 {
+    font-size: 2rem !important;
+    line-height: 1.08 !important;
+  }
+
+  main h2 {
+    font-size: 1.5rem !important;
+    line-height: 1.12 !important;
+  }
+}
+
 .twx-refractive-pill {
   position: relative;
   isolation: isolate;
@@ -266,6 +282,49 @@ html {
 .twx-refractive-pill.twx-header-logo-pill img,
 .twx-refractive-pill.twx-header-cta-pill svg {
   filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.12));
+}
+
+@media (max-width: 1023px) {
+  .twx-header-container {
+    padding-inline: calc(var(--rail-pad) * 2);
+  }
+
+  .twx-mobile-solid-pill.twx-pill-active {
+    background: #020817 !important;
+    background-color: #020817 !important;
+    background-image: none !important;
+    border-color: transparent !important;
+    box-shadow:
+      0 14px 42px rgba(0, 0, 0, 0.42),
+      0 0 0 1px rgba(255, 255, 255, 0.06);
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  .twx-mobile-solid-pill.twx-pill-active::before,
+  .twx-mobile-solid-pill.twx-pill-active::after {
+    opacity: 0;
+  }
+
+  .twx-pill-active.twx-header-logo-pill {
+    margin: 0;
+    padding: 0.62rem 1rem;
+  }
+
+  .twx-header-cta-pill.twx-pill-active {
+    background: white !important;
+    background-color: white !important;
+    background-image: none !important;
+    color: #03143c !important;
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.18);
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  .twx-header-cta-pill.twx-pill-active::before,
+  .twx-header-cta-pill.twx-pill-active::after {
+    opacity: 0;
+  }
 }
 
 .twix-eyebrow {

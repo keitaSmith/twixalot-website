@@ -16,30 +16,30 @@ export function AboutPreview() {
 
   useGSAP(
     () => {
-      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const mm = gsap.matchMedia();
 
-      if (reduceMotion) {
-        return;
-      }
+      mm.add("(min-width: 768px) and (prefers-reduced-motion: no-preference)", () => {
+        const elements = gsap.utils.toArray<HTMLElement>("[data-about-reveal]", section.current);
 
-      const elements = gsap.utils.toArray<HTMLElement>("[data-about-reveal]", section.current);
+        gsap.set(elements, { opacity: 0, y: 46, filter: "blur(10px)" });
 
-      gsap.set(elements, { opacity: 0, y: 46, filter: "blur(10px)" });
-
-      gsap.to(elements, {
-        opacity: 1,
-        y: 0,
-        filter: "blur(0px)",
-        stagger: 0.12,
-        duration: 0.78,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: section.current,
-          start: "top 72%",
-          end: "center 52%",
-          scrub: 0.7,
-        },
+        gsap.to(elements, {
+          opacity: 1,
+          y: 0,
+          filter: "blur(0px)",
+          stagger: 0.12,
+          duration: 0.78,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: section.current,
+            start: "top 72%",
+            end: "center 52%",
+            scrub: 0.7,
+          },
+        });
       });
+
+      return () => mm.revert();
     },
     { scope: section },
   );

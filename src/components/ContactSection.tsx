@@ -14,30 +14,30 @@ export function ContactSection() {
 
   useGSAP(
     () => {
-      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const mm = gsap.matchMedia();
 
-      if (reduceMotion) {
-        return;
-      }
+      mm.add("(min-width: 768px) and (prefers-reduced-motion: no-preference)", () => {
+        const items = gsap.utils.toArray<HTMLElement>("[data-contact-reveal]", section.current);
 
-      const items = gsap.utils.toArray<HTMLElement>("[data-contact-reveal]", section.current);
+        gsap.set(items, { opacity: 0, y: 42, filter: "blur(10px)" });
 
-      gsap.set(items, { opacity: 0, y: 42, filter: "blur(10px)" });
-
-      gsap.to(items, {
-        opacity: 1,
-        y: 0,
-        filter: "blur(0px)",
-        stagger: 0.12,
-        duration: 0.72,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: section.current,
-          start: "top 74%",
-          end: "center 54%",
-          scrub: 0.7,
-        },
+        gsap.to(items, {
+          opacity: 1,
+          y: 0,
+          filter: "blur(0px)",
+          stagger: 0.12,
+          duration: 0.72,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: section.current,
+            start: "top 74%",
+            end: "center 54%",
+            scrub: 0.7,
+          },
+        });
       });
+
+      return () => mm.revert();
     },
     { scope: section },
   );

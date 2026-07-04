@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Layers3, Sparkles } from "lucide-react";
+import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { WebsiteProjectCard } from "@/components/work/WebsiteProjectCard";
 import { WebsiteProjectGrid } from "@/components/work/WebsiteProjectGrid";
@@ -113,6 +114,7 @@ export default function WorkPage() {
           </div>
         </section>
       </main>
+      <Footer />
     </>
   );
 }

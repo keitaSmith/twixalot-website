@@ -180,12 +180,12 @@ export const techStack = [
 ];
 
 export const whyTwixalot = [
-  { title: "Premium visual execution", icon: Sparkles },
-  { title: "Clear communication", icon: Handshake },
-  { title: "Custom development", icon: Braces },
-  { title: "CMS handover", icon: Blocks },
-  { title: "Scalable technical structure", icon: CircleCheck },
-  { title: "Ongoing support", icon: LifeBuoy },
+  { title: "Premium Visual Execution", icon: Sparkles },
+  { title: "Clear Communication", icon: Handshake },
+  { title: "Custom Development", icon: Braces },
+  { title: "CMS Handover", icon: Blocks },
+  { title: "Scalable Technical Structure", icon: CircleCheck },
+  { title: "Ongoing Support", icon: LifeBuoy },
 ];
 
 export const projectTypes = [
@@ -193,8 +193,8 @@ export const projectTypes = [
   "Signature Website",
   "Content Platform",
   "Custom System",
-  "Care and Support",
-  "Not sure yet",
+  "Care And Support",
+  "Not Sure Yet",
 ];
 
 export const budgetRanges = [
@@ -204,15 +204,15 @@ export const budgetRanges = [
   "CHF 9\u2019500 to CHF 15\u2019000",
   "CHF 15\u2019000 to CHF 25\u2019000",
   "CHF 25\u2019000+",
-  "Calculator estimate attached",
-  "Not sure yet",
+  "Calculator Estimate Attached",
+  "Not Sure Yet",
 ];
 
 export const timelineOptions = [
   "Flexible",
-  "Standard priority",
-  "Rush or urgent",
-  "Not sure yet",
+  "Standard Priority",
+  "Rush Or Urgent",
+  "Not Sure Yet",
 ];
 
 export const ArrowIcon = ArrowRight;

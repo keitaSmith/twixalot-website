@@ -1,20 +1,36 @@
-import Link from "next/link";
-import { Header } from "@/components/Header";
+import type { Metadata } from "next";
+import { LegalPageLayout } from "@/components/legal/LegalPageLayout";
+
+export const metadata: Metadata = {
+  title: "Impressum / Legal Notice | Twixalot",
+  description: "Legal notice and operator information for Twixalot.",
+};
+
+const sections = [
+  {
+    title: "Website Operator",
+    body: [
+      "Twixalot",
+      "Keita Smith",
+      "Krummackerstrasse 4",
+      "8902 Urdorf, Zurich",
+      "Switzerland",
+      "Phone: +41 76 324 51 00",
+      "keita.smith@twixalot.com",
+      "https://twixalot.com",
+    ],
+  },
+  {
+    title: "Responsible For Content",
+    body: [
+      "Keita Smith",
+      "Krummackerstrasse 4",
+      "8902 Urdorf, Zurich",
+      "Switzerland",
+    ],
+  },
+];
 
 export default function ImpressumPage() {
-  return (
-    <>
-      <Header />
-      <main className="grid min-h-screen place-items-center bg-[#010613] px-6 pt-28 text-white">
-        <div className="max-w-xl text-center">
-          <p className="twix-eyebrow">Legal</p>
-          <h1 className="mt-5 text-5xl font-semibold">Impressum</h1>
-          <p className="mt-5 text-white/64">Placeholder for legal company information.</p>
-          <Link href="/" className="mt-8 inline-flex bg-white px-5 py-3 font-semibold text-[#03143c]">
-            Back home
-          </Link>
-        </div>
-      </main>
-    </>
-  );
+  return <LegalPageLayout title="Impressum" sections={sections} />;
 }

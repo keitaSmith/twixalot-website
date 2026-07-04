@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ContactForm } from "@/components/ContactForm";
+import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 
 export default function ContactPage() {
@@ -21,6 +22,7 @@ export default function ContactPage() {
           </div>
         </div>
       </main>
+      <Footer />
     </>
   );
 }

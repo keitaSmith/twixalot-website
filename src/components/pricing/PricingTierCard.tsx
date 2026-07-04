@@ -27,7 +27,7 @@ export function PricingTierCard({ title, price, description, bestFor, note, feat
         <h3 className="mt-5 text-2xl font-semibold leading-tight text-white">{title}</h3>
         <p className="mt-4 text-sm leading-7 text-white/64">{description}</p>
         <div className="mt-7">
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/42">Best for</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/42">Best For</p>
           <ul className="mt-4 grid gap-3">
             {bestFor.map((item) => (
               <li key={item} className="flex gap-3 text-sm leading-6 text-white/72">

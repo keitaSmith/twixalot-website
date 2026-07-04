@@ -207,7 +207,7 @@ export function Hero() {
       <div className={`twix-container relative z-10 grid min-h-screen items-center pb-16 pt-28 lg:pt-28 ${styles.heroContentShell}`}>
         <div ref={copy} className={`max-w-3xl ${styles.copyContent} ${styles.interactiveLayer}`}>
           <p className="mb-5 inline-flex items-center gap-2 bg-white/[0.055] px-3 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-white/72 backdrop-blur-xl">
-            Swiss Software Studio
+            Zurich, Switzerland Software Studio
           </p>
           <h1 className="max-w-3xl text-balance text-3xl font-semibold leading-[1.05] text-white sm:text-5xl lg:text-6xl 2xl:text-7xl">
             Digital Products With A Little Magic And A Lot Of Engineering

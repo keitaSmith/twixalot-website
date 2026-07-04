@@ -82,15 +82,15 @@ const pathways: Pathway[] = [
 ];
 
 const pageScopeOptions: PriceOption[] = [
-  { label: "Within included page allowance", value: "included", amount: 0 },
-  { label: "Slightly above included allowance", value: "slight", amount: 1200, detail: "Additional page or screen scope" },
-  { label: "Medium page or screen expansion", value: "medium", amount: 2800, detail: "Additional page or screen scope" },
-  { label: "Large page or screen expansion", value: "large", amount: 5000, detail: "Additional page or screen scope" },
+  { label: "Within Included Page Allowance", value: "included", amount: 0 },
+  { label: "Slightly Above Included Allowance", value: "slight", amount: 1200, detail: "Additional page or screen scope" },
+  { label: "Medium Page Or Screen Expansion", value: "medium", amount: 2800, detail: "Additional page or screen scope" },
+  { label: "Large Page Or Screen Expansion", value: "large", amount: 5000, detail: "Additional page or screen scope" },
 ];
 
 const designOptions: Array<PriceOption & { value: DesignKey }> = [
   {
-    label: "Clean and focused",
+    label: "Clean And Focused",
     value: "clean",
     amount: 0,
     description:
@@ -98,7 +98,7 @@ const designOptions: Array<PriceOption & { value: DesignKey }> = [
     examples: ["Simple service website", "Landing page", "Minimal animation"],
   },
   {
-    label: "Custom branded",
+    label: "Custom Branded",
     value: "branded",
     amount: 0,
     description:
@@ -106,7 +106,7 @@ const designOptions: Array<PriceOption & { value: DesignKey }> = [
     examples: ["Custom hero sections", "Branded layouts", "Light tasteful motion"],
   },
   {
-    label: "Premium visual direction",
+    label: "Premium Visual Direction",
     value: "premium",
     amount: 0,
     description:
@@ -114,7 +114,7 @@ const designOptions: Array<PriceOption & { value: DesignKey }> = [
     examples: ["Expressive homepage", "Custom visual treatments", "More careful responsive QA"],
   },
   {
-    label: "Highly animated or cinematic",
+    label: "Highly Animated Or Cinematic",
     value: "cinematic",
     amount: 0,
     description:
@@ -132,7 +132,7 @@ const cmsOptions: Array<PriceOption & { value: CmsKey; baseAmount: number }> = [
     description: "Mostly fixed content. Future changes are handled by a developer.",
   },
   {
-    label: "Basic CMS editing",
+    label: "Basic CMS Editing",
     value: "basic",
     amount: 0,
     baseAmount: 1800,
@@ -155,53 +155,53 @@ const cmsOptions: Array<PriceOption & { value: CmsKey; baseAmount: number }> = [
 ];
 
 const languageOptions: PriceOption[] = [
-  { label: "One language", value: "one", amount: 0 },
-  { label: "Two languages", value: "two", amount: 1200, detail: "Two-language setup" },
-  { label: "Three or more languages", value: "three-plus", amount: 2500, detail: "Multilingual content setup" },
+  { label: "One Language", value: "one", amount: 0 },
+  { label: "Two Languages", value: "two", amount: 1200, detail: "Two-language setup" },
+  { label: "Three Or More Languages", value: "three-plus", amount: 2500, detail: "Multilingual content setup" },
 ];
 
 const contentHelpOptions: PriceOption[] = [
-  { label: "Client provides final content", value: "provided", amount: 0, description: "You provide the finished text, images and core content." },
-  { label: "Light editing and formatting", value: "light", amount: 900, description: "I lightly edit, format and place supplied content." },
-  { label: "Content structure and rewrite support", value: "rewrite", amount: 2000, description: "I help structure pages and improve rough copy." },
-  { label: "Heavy content planning and page writing support", value: "heavy", amount: 4000, description: "I help plan, write and shape substantial page content." },
+  { label: "Client Provides Final Content", value: "provided", amount: 0, description: "You provide the finished text, images and core content." },
+  { label: "Light Editing And Formatting", value: "light", amount: 900, description: "I lightly edit, format and place supplied content." },
+  { label: "Content Structure And Rewrite Support", value: "rewrite", amount: 2000, description: "I help structure pages and improve rough copy." },
+  { label: "Heavy Content Planning And Page Writing Support", value: "heavy", amount: 4000, description: "I help plan, write and shape substantial page content." },
 ];
 
 const contentModules: PriceOption[] = [
-  { label: "News or blog", value: "news", amount: 1200 },
-  { label: "Events calendar", value: "events", amount: 1800 },
-  { label: "Resources directory", value: "resources", amount: 1800 },
-  { label: "Services section", value: "services", amount: 1000 },
-  { label: "People or team profiles", value: "people", amount: 1000 },
-  { label: "Partners or sponsors", value: "partners", amount: 1200 },
-  { label: "Community updates", value: "community", amount: 1200 },
-  { label: "Jobs or opportunities", value: "jobs", amount: 1800 },
-  { label: "Media gallery or video library", value: "media", amount: 2200 },
-  { label: "Product catalogue", value: "products", amount: 3000 },
+  { label: "News Or Blog", value: "news", amount: 1200 },
+  { label: "Events Calendar", value: "events", amount: 1800 },
+  { label: "Resources Directory", value: "resources", amount: 1800 },
+  { label: "Services Section", value: "services", amount: 1000 },
+  { label: "People Or Team Profiles", value: "people", amount: 1000 },
+  { label: "Partners Or Sponsors", value: "partners", amount: 1200 },
+  { label: "Community Updates", value: "community", amount: 1200 },
+  { label: "Jobs Or Opportunities", value: "jobs", amount: 1800 },
+  { label: "Media Gallery Or Video Library", value: "media", amount: 2200 },
+  { label: "Product Catalogue", value: "products", amount: 3000 },
 ];
 
 const integrationOptions: PriceOption[] = [
-  { label: "Newsletter integration", value: "newsletter", amount: 800 },
-  { label: "Calendar integration", value: "calendar", amount: 1200 },
-  { label: "Booking flow", value: "booking", amount: 2500 },
+  { label: "Newsletter Integration", value: "newsletter", amount: 800 },
+  { label: "Calendar Integration", value: "calendar", amount: 1200 },
+  { label: "Booking Flow", value: "booking", amount: 2500 },
   { label: "Payments", value: "payments", amount: 2800 },
-  { label: "Memberships or gated content", value: "memberships", amount: 4500 },
-  { label: "Multiple APIs or custom integrations", value: "apis", amount: 5500 },
-  { label: "Blog or news section", value: "feature-news", amount: 1200 },
-  { label: "Events calendar", value: "feature-events", amount: 1800 },
-  { label: "E-commerce or product catalogue", value: "feature-commerce", amount: 3500 },
-  { label: "Member area or login", value: "feature-members", amount: 4500 },
-  { label: "Dashboard or admin workflow", value: "feature-dashboard", amount: 6000 },
-  { label: "Migration from old website", value: "migration", amount: 1500 },
-  { label: "SEO setup", value: "seo", amount: 0, detail: "Basic SEO setup is included in the pathway." },
-  { label: "Analytics setup", value: "analytics", amount: 500 },
-  { label: "Training or handover session", value: "training", amount: 600 },
+  { label: "Memberships Or Gated Content", value: "memberships", amount: 4500 },
+  { label: "Multiple APIs Or Custom Integrations", value: "apis", amount: 5500 },
+  { label: "Blog Or News Section", value: "feature-news", amount: 1200 },
+  { label: "Events Calendar", value: "feature-events", amount: 1800 },
+  { label: "E-Commerce Or Product Catalogue", value: "feature-commerce", amount: 3500 },
+  { label: "Member Area Or Login", value: "feature-members", amount: 4500 },
+  { label: "Dashboard Or Admin Workflow", value: "feature-dashboard", amount: 6000 },
+  { label: "Migration From Old Website", value: "migration", amount: 1500 },
+  { label: "SEO Setup", value: "seo", amount: 0, detail: "Basic SEO setup is included in the pathway." },
+  { label: "Analytics Setup", value: "analytics", amount: 500 },
+  { label: "Training Or Handover Session", value: "training", amount: 600 },
 ];
 
 const timelineOptions: Array<PriceOption & { multiplier?: number }> = [
-  { label: "Flexible timeline", value: "flexible", amount: 0 },
-  { label: "Standard priority", value: "standard", amount: 800 },
-  { label: "Rush timeline", value: "rush", amount: 0, multiplier: 1.2, description: "Requires schedule compression, priority planning and a 20 percent estimate increase." },
+  { label: "Flexible Timeline", value: "flexible", amount: 0 },
+  { label: "Standard Priority", value: "standard", amount: 800 },
+  { label: "Rush Timeline", value: "rush", amount: 0, multiplier: 1.2, description: "Requires schedule compression, priority planning and a 20 percent estimate increase." },
 ];
 
 const careOptions: CarePlan[] = [
@@ -209,7 +209,7 @@ const careOptions: CarePlan[] = [
     label: "No Monthly Care",
     value: "none",
     amount: 0,
-    subtitle: "Project handover only",
+    subtitle: "Project Handover Only",
     chooseIfText: "Your website is mostly finished, rarely changes and you prefer to request future updates separately.",
     includes: ["Final launch support", "Basic handover", "Basic documentation where appropriate", "Future work quoted separately"],
     explanation: "Good for simple sites that do not need regular attention after launch.",
@@ -218,7 +218,7 @@ const careOptions: CarePlan[] = [
     label: "Basic Care",
     value: "basic",
     amount: 290,
-    subtitle: "Peace of mind for simple websites",
+    subtitle: "Peace Of Mind For Simple Websites",
     chooseIfText: "Your site is small, does not change often, but you want light technical support after launch.",
     includes: ["Monthly technical check", "Minor bug fixes", "Small text, image or layout updates", "Email support", "Up to 1 hour of small updates per month"],
     explanation: "Recommended for simple websites that need light ongoing help, occasional fixes and technical peace of mind after launch.",
@@ -227,7 +227,7 @@ const careOptions: CarePlan[] = [
     label: "Standard Care",
     value: "standard",
     amount: 490,
-    subtitle: "Regular support for CMS websites",
+    subtitle: "Regular Support For CMS Websites",
     chooseIfText: "Your website has a CMS, regular content updates or needs small improvements over time.",
     includes: ["Everything in Basic Care", "Up to 2.5 hours of updates per month", "CMS content support", "Small design or layout improvements", "Priority bug fixes", "Quarterly review"],
     explanation: "Recommended for CMS websites and content platforms that need regular updates, CMS help and small improvements after launch.",
@@ -236,7 +236,7 @@ const careOptions: CarePlan[] = [
     label: "Growth Care",
     value: "growth",
     amount: 900,
-    subtitle: "Ongoing improvements for active platforms",
+    subtitle: "Ongoing Improvements For Active Platforms",
     chooseIfText: "Your website or platform is active, changes often or plays an important role in your business, community or organisation.",
     includes: ["Everything in Standard Care", "Up to 5 hours of updates or improvements per month", "New small sections or page improvements", "Analytics or performance review where applicable", "Monthly planning check-in", "Higher priority support"],
     explanation: "Recommended for active platforms that need ongoing improvements, content support and technical attention after launch.",
@@ -290,18 +290,18 @@ export function PricingCalculator() {
   const selectedCare = findOption(careOptions, care || "none");
   const wizardSteps = useMemo(() => {
     const steps = [
-      { key: "pathway", question: "What do you want to build?", required: true },
-      { key: "scope", question: "How large is the project?", required: true },
-      { key: "design", question: "How polished or interactive should it feel?", required: true },
-      { key: "cms", question: "Do you need to edit content yourself?", required: true },
-      ...(effectivePathway === "content" ? [{ key: "primary", question: "What is the main content area?", required: true }] : []),
-      { key: "modules", question: "Do you need any additional content areas?", required: false },
-      { key: "languages", question: "How many languages should the site support?", required: true },
-      { key: "content", question: "How much help do you need with content?", required: true },
-      { key: "features", question: "What extra features or integrations do you need?", required: false },
-      { key: "timeline", question: "How soon do you need it?", required: true },
-      { key: "care", question: "What kind of support do you want after launch?", required: true },
-      { key: "result", question: "Your planning estimate", required: false },
+      { key: "pathway", question: "What Do You Want To Build?", required: true },
+      { key: "scope", question: "How Large Is The Project?", required: true },
+      { key: "design", question: "How Polished Or Interactive Should It Feel?", required: true },
+      { key: "cms", question: "Do You Need To Edit Content Yourself?", required: true },
+      ...(effectivePathway === "content" ? [{ key: "primary", question: "What Is The Main Content Area?", required: true }] : []),
+      { key: "modules", question: "Do You Need Any Additional Content Areas?", required: false },
+      { key: "languages", question: "How Many Languages Should The Site Support?", required: true },
+      { key: "content", question: "How Much Help Do You Need With Content?", required: true },
+      { key: "features", question: "What Extra Features Or Integrations Do You Need?", required: false },
+      { key: "timeline", question: "How Soon Do You Need It?", required: true },
+      { key: "care", question: "What Kind Of Support Do You Want After Launch?", required: true },
+      { key: "result", question: "Your Planning Estimate", required: false },
     ];
     return steps;
   }, [effectivePathway]);
@@ -375,7 +375,7 @@ export function PricingCalculator() {
     if (selectedTimeline.multiplier) {
       const rushIncrease = subtotal * (selectedTimeline.multiplier - 1);
       subtotal += rushIncrease;
-      addedScope.push({ label: "Rush timeline", detail: "20 percent priority increase applied after selected scope", tone: "upgrade" });
+      addedScope.push({ label: "Rush Timeline", detail: "20 percent priority increase applied after selected scope", tone: "upgrade" });
     }
 
     const lowRaw = effectivePathway === "custom" ? Math.max(12000, subtotal * 0.9) : subtotal * 0.9;
@@ -449,17 +449,17 @@ export function PricingCalculator() {
   };
 
   const answerRows = [
-    ["Project pathway", selectedPathway.label],
-    ["Project size", pageScope ? findOption(pageScopeOptions, pageScope).label : ""],
-    ["Visual design and interaction level", designLevel ? findOption(designOptions, designLevel).label : ""],
-    ["CMS needs", cmsNeeds ? findOption(cmsOptions, cmsNeeds).label : ""],
-    ["Main content focus", effectivePathway === "content" && primaryModule ? findOption(contentModules, primaryModule).label : ""],
-    ["Additional content areas", additionalModules.length ? additionalModules.map((item) => findOption(contentModules, item).label).join(", ") : ""],
+    ["Project Pathway", selectedPathway.label],
+    ["Project Size", pageScope ? findOption(pageScopeOptions, pageScope).label : ""],
+    ["Visual Design And Interaction Level", designLevel ? findOption(designOptions, designLevel).label : ""],
+    ["CMS Needs", cmsNeeds ? findOption(cmsOptions, cmsNeeds).label : ""],
+    ["Main Content Focus", effectivePathway === "content" && primaryModule ? findOption(contentModules, primaryModule).label : ""],
+    ["Additional Content Areas", additionalModules.length ? additionalModules.map((item) => findOption(contentModules, item).label).join(", ") : ""],
     ["Languages", languages ? findOption(languageOptions, languages).label : ""],
-    ["Content support", contentHelp ? findOption(contentHelpOptions, contentHelp).label : ""],
-    ["Integrations and special features", features.length ? features.map((item) => findOption(integrationOptions, item).label).join(", ") : ""],
+    ["Content Support", contentHelp ? findOption(contentHelpOptions, contentHelp).label : ""],
+    ["Integrations And Special Features", features.length ? features.map((item) => findOption(integrationOptions, item).label).join(", ") : ""],
     ["Timeline", timeline ? findOption(timelineOptions, timeline).label : ""],
-    ["Care and Support", care ? findOption(careOptions, care).label : ""],
+    ["Care And Support", care ? findOption(careOptions, care).label : ""],
   ].filter(([, value]) => value);
 
   const buildInquiryMessage = () => {
@@ -468,24 +468,24 @@ export function PricingCalculator() {
       "",
       "I used the Twixalot pricing calculator and would like to discuss this estimate.",
       "",
-      "Estimated project range:",
+      "Estimated Project Range:",
       `${estimate.low} to ${estimate.high}`,
       "",
-      "Selected monthly care:",
+      "Selected Monthly Care:",
       estimate.monthlyCare,
       "",
-      "Project pathway:",
+      "Project Pathway:",
       selectedPathway.label,
       "",
-      "Included in this pathway:",
+      "Included In This Pathway:",
       ...estimate.included.map((item) => `* ${item}`),
       "",
-      "My answers:",
+      "My Answers:",
       ...answerRows.map(([label, value]) => `* ${label}: ${value}`),
     ];
 
     if (estimate.addedScope.length > 0) {
-      lines.push("", "Added scope:", ...estimate.addedScope.map((item) => `* ${item.label}`));
+      lines.push("", "Added Scope:", ...estimate.addedScope.map((item) => `* ${item.label}`));
     }
 
     lines.push("", "Message:", "");
@@ -518,7 +518,7 @@ export function PricingCalculator() {
     <div className="rounded-[8px] border border-white/10 bg-white/[0.04] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.24)] sm:p-7">
       <div className="mb-8">
         <div className="flex flex-wrap items-center justify-between gap-3 text-sm text-white/58">
-          <span>{isResultStep ? "Estimate ready" : `Step ${stepIndex + 1} of ${totalQuestions}`}</span>
+          <span>{isResultStep ? "Estimate Ready" : `Step ${stepIndex + 1} of ${totalQuestions}`}</span>
           <span>{Math.round(progressPercent)}% complete</span>
         </div>
         <div
@@ -535,7 +535,7 @@ export function PricingCalculator() {
 
       <div className={`grid gap-6 lg:items-start ${isResultStep ? "" : "lg:grid-cols-[minmax(0,1fr)_22rem]"}`}>
         <section>
-          <p className="twix-eyebrow">Estimate wizard</p>
+          <p className="twix-eyebrow">Estimate Wizard</p>
           <h3 className="mt-4 text-3xl font-semibold leading-tight text-white">{currentStep.question}</h3>
           {error ? <p className="mt-4 rounded-[8px] border border-[rgba(226,7,86,0.42)] bg-[rgba(226,7,86,0.1)] p-3 text-sm text-white">{error}</p> : null}
           <div className="mt-6">{renderStep()}</div>
@@ -543,7 +543,7 @@ export function PricingCalculator() {
 
         {!isResultStep ? (
           <aside className="rounded-[8px] border border-white/10 bg-[#050b1d]/72 p-5 text-sm leading-7 text-white/58">
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/42">Selected so far</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/42">Selected So Far</p>
             <dl className="mt-4 grid gap-3">
               {answerRows.length > 0 ? answerRows.slice(0, 6).map(([label, value]) => (
                 <div key={label}>

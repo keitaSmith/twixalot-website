@@ -67,7 +67,7 @@ export function AboutPreview() {
           </p>
           <h2 data-about-reveal>Creative Software, Built With Care</h2>
           <p data-about-reveal>
-            Twixalot is led by Keita Smith, a Swiss software developer and creative technologist with roots in Trinidad and Tobago. I build polished websites, content platforms and custom digital systems that bring together strong visual direction, practical engineering and clear communication.
+            Twixalot is led by Keita Smith, a Zurich, Switzerland-based software developer and creative technologist with roots in Trinidad and Tobago. I build polished websites, content platforms and custom digital systems that bring together strong visual direction, practical engineering and clear communication.
           </p>
           <div data-about-reveal>
             <Link href="/about" className={styles.button}>

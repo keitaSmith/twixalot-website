@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowRight, Blocks, MessageCircle, PenTool, Settings2 } from "lucide-react";
 import { SiBlender, SiUnrealengine } from "react-icons/si";
 import { ConstellationMorph } from "@/components/ConstellationMorph";
+import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 
 export const metadata: Metadata = {
@@ -230,6 +231,7 @@ export default function AboutPage() {
           </div>
         </section>
       </main>
+      <Footer />
     </>
   );
 }

@@ -9,10 +9,10 @@ import {
   MonitorSmartphone,
   Sparkles,
 } from "lucide-react";
+import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
-import { Logo } from "@/components/Logo";
 import { processOverview, processSteps } from "@/data/processSteps";
-import { navItems, startingPoints } from "@/data/site";
+import { startingPoints } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "Services | Twixalot",
@@ -79,7 +79,7 @@ export default function ServicesPage() {
             <div className="twix-fade-up max-w-4xl">
               <p className="twix-eyebrow">Services</p>
               <h1 className="mt-6 max-w-5xl text-5xl font-semibold leading-[1.02] sm:text-6xl lg:text-7xl">
-                Websites, platforms, and systems built around how your business actually works.
+                Websites, Platforms And Systems Built Around How Your Business Actually Works
               </h1>
               <p className="mt-7 max-w-2xl text-lg leading-8 text-white/70">
                 From polished launch websites to content platforms, booking flows, member portals, and custom internal
@@ -110,7 +110,7 @@ export default function ServicesPage() {
               <div className="relative">
                 <Sparkles aria-hidden="true" className="text-[var(--color-magenta)]" size={22} />
                 <p className="mt-6 text-sm font-semibold uppercase tracking-[0.16em] text-white/46">
-                  Built for real workflows
+                  Built For Real Workflows
                 </p>
                 <p className="mt-4 text-base leading-8 text-white/68">
                   The work can start simple or grow into a platform. The shape comes from what your team needs to
@@ -124,8 +124,8 @@ export default function ServicesPage() {
         <section className="relative py-12 sm:py-20">
           <div className="twix-container">
             <SectionIntro
-              label="What I build"
-              heading="Digital builds that go beyond a basic template."
+              label="What I Build"
+              heading="Digital Builds That Go Beyond A Basic Template"
               intro="Some clients need a fast, credible web presence. Others need a platform their team can update, or a custom workflow that saves time behind the scenes. The right build depends on what the business actually needs to do."
             />
             <div className="mt-10 grid items-stretch gap-5 md:grid-cols-2 xl:grid-cols-4">
@@ -157,7 +157,7 @@ export default function ServicesPage() {
         <section id="build-paths" className="relative scroll-mt-28 py-12 sm:py-20">
           <div className="twix-container">
             <SectionIntro
-              label="Choose your build path"
+              label="Choose Your Build Path"
               heading="Practical Ways To Start"
               intro="Every project starts with a clear build path. These options show the usual starting points before the final scope is confirmed."
             />
@@ -224,8 +224,8 @@ export default function ServicesPage() {
         <section className="relative py-12 sm:py-20">
           <div className="twix-container grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
             <SectionIntro
-              label="What can be included"
-              heading="The right pieces for the job."
+              label="What Can Be Included"
+              heading="The Right Pieces For The Job"
               intro="Each build is scoped around what needs to work on launch day and what your team should be able to manage afterwards."
             />
             <div className="grid gap-3 sm:grid-cols-2">
@@ -245,9 +245,9 @@ export default function ServicesPage() {
         <section className="relative py-12 sm:py-20">
           <div className="twix-container grid gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
             <div className="twix-fade-up max-w-3xl">
-              <p className="twix-eyebrow">Best fit</p>
+              <p className="twix-eyebrow">Best Fit</p>
               <h2 className="mt-5 text-3xl font-semibold leading-tight sm:text-5xl">
-                For teams that need more than a nice-looking page.
+                For Teams That Need More Than A Nice-Looking Page
               </h2>
               <p className="mt-6 text-base leading-8 text-white/66">
                 Twixalot is a good fit when you need a website that looks custom, a CMS your team can actually use, or
@@ -276,7 +276,7 @@ export default function ServicesPage() {
               />
               <div className="relative">
                 <h2 className="max-w-3xl text-3xl font-semibold leading-tight sm:text-5xl">
-                  Not sure which path fits?
+                  Not Sure Which Path Fits?
                 </h2>
                 <p className="mt-5 max-w-2xl text-base leading-8 text-white/66">
                   Tell me what you are trying to build, and I&apos;ll help you figure out whether you need a launch
@@ -306,37 +306,5 @@ function SectionIntro({ label, heading, intro }: { label: string; heading: strin
       <h2 className="mt-5 text-3xl font-semibold leading-tight sm:text-5xl">{heading}</h2>
       <p className="mt-5 text-base leading-8 text-white/62">{intro}</p>
     </div>
-  );
-}
-
-function Footer() {
-  return (
-    <footer className="border-t border-white/10 bg-[#01040e] py-12 text-white">
-      <div className="twix-container grid gap-10 lg:grid-cols-[1.2fr_0.8fr_0.8fr]">
-        <div>
-          <Logo />
-          <p className="mt-5 max-w-md text-sm leading-7 text-white/58">
-            Swiss-based freelance software studio for polished websites, web apps, CMS platforms and automations.
-          </p>
-        </div>
-        <nav className="grid grid-cols-2 gap-3 text-sm text-white/66">
-          {navItems.map((item) => (
-            <Link key={item.href} href={item.href} className="hover:text-white">
-              {item.label}
-            </Link>
-          ))}
-          <Link href="/impressum" className="hover:text-white">
-            Impressum
-          </Link>
-          <Link href="/privacy" className="hover:text-white">
-            Privacy Policy
-          </Link>
-        </nav>
-        <div className="text-sm leading-7 text-white/62">
-          <p>hello@twixalot.example</p>
-          <p>Switzerland</p>
-        </div>
-      </div>
-    </footer>
   );
 }

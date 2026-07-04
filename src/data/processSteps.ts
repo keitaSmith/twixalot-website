@@ -2,7 +2,7 @@ import { CalendarCheck, ClipboardList, Route, Settings2 } from "lucide-react";
 
 export const processOverview = {
   label: "HOW IT WORKS",
-  heading: "A clear path from idea to launch.",
+  heading: "A Clear Path From Idea To Launch",
   intro:
     "A compact version of the usual project rhythm, shaped to keep the work focused, understandable and ready for handover.",
 };

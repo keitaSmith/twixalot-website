@@ -39,16 +39,16 @@ export function EstimateSummary({
           <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.06]">
             <ShieldCheck aria-hidden="true" size={18} />
           </span>
-          <p className="text-sm font-semibold uppercase tracking-[0.14em]">Planning range</p>
+          <p className="text-sm font-semibold uppercase tracking-[0.14em]">Planning Range</p>
         </div>
 
-        <p className="mt-7 text-sm text-white/52">Estimated project range</p>
+        <p className="mt-7 text-sm text-white/52">Estimated Project Range</p>
         <p className="mt-2 text-3xl font-semibold leading-tight text-white sm:text-4xl">
           {low} to {high}
         </p>
 
         <div className="mt-6 rounded-[8px] border border-white/10 bg-white/[0.045] p-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/42">Optional monthly care</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/42">Optional Monthly Care</p>
           <p className="mt-2 text-xl font-semibold text-white">{hasMonthlyCare ? monthlyCare : "Not selected"}</p>
           <p className="mt-3 text-xs leading-6 text-white/52">{monthlyCareExplanation}</p>
         </div>
@@ -70,7 +70,7 @@ export function EstimateSummary({
         </div>
 
         <div className="mt-6">
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/42">Added scope</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/42">Added Scope</p>
           {addedScope.length > 0 ? (
             <ul className="mt-3 grid gap-3 text-sm leading-6 text-white/66">
               {addedScope.map((item) => (

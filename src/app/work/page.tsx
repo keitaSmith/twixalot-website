@@ -38,8 +38,8 @@ export default function WorkPage() {
 
             <div className="twix-fade-up rounded-[8px] border border-white/10 bg-white/[0.045] p-5 shadow-[0_24px_90px_rgba(0,0,0,0.28)] [animation-delay:120ms]">
               <div className="grid grid-cols-2 gap-3">
-                <WorkStat value={modernProjects.length.toString()} label="Modern CMS builds" />
-                <WorkStat value={archiveProjects.length.toString()} label="Archive previews" />
+                <WorkStat value={modernProjects.length.toString()} label="Modern CMS Builds" />
+                <WorkStat value={archiveProjects.length.toString()} label="Archive Previews" />
               </div>
               <div className="mt-5 rounded-[8px] border border-white/10 bg-[#060c21]/72 p-5">
                 <Sparkles aria-hidden="true" className="text-[var(--color-magenta)]" size={20} />

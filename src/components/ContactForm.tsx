@@ -31,6 +31,19 @@ type FormValues = {
   honeypot: string;
 };
 
+type SummaryBlock = {
+  label: string;
+  value: string;
+  wide?: boolean;
+};
+
+type SubmittedSummary = {
+  contact: SummaryBlock[];
+  estimate: SummaryBlock[];
+  responses: SummaryBlock[];
+  message: string;
+};
+
 type ContactSource = "direct-contact" | "pricing-calculator";
 type SubmitState = "idle" | "submitting" | "success" | "error";
 
@@ -39,55 +52,113 @@ const initialValues: FormValues = {
   email: "",
   phone: "",
   company: "",
-  projectType: "Not sure yet",
-  budget: "Not sure yet",
-  timeline: "Not sure yet",
+  projectType: "Not Sure Yet",
+  budget: "Not Sure Yet",
+  timeline: "Not Sure Yet",
   message: "",
   honeypot: "",
 };
 
+const noMessageText = "No additional message was provided.";
+const noEstimateText = "No calculator estimate was provided.";
+
 function timelineFromEstimate(value?: string) {
-  if (!value) {
+  if (!value) return "";
+  if (value === "Flexible Timeline") return "Flexible";
+  if (value === "Standard Priority") return "Standard Priority";
+  if (value === "Rush Timeline") return "Rush Or Urgent";
+  return "";
+}
+
+function readableValue(value: unknown): string {
+  if (Array.isArray(value)) {
+    return value.filter(Boolean).map(String).join("\n");
+  }
+
+  if (value === null || value === undefined || value === "") {
     return "";
   }
 
-  if (value === "Flexible timeline") {
-    return "Flexible";
+  if (typeof value === "object") {
+    return Object.entries(value as Record<string, unknown>)
+      .map(([key, entry]) => `${key}: ${readableValue(entry)}`)
+      .filter(Boolean)
+      .join("\n");
   }
 
-  if (value === "Standard priority") {
-    return "Standard priority";
-  }
+  return String(value);
+}
 
-  if (value === "Rush timeline") {
-    return "Rush or urgent";
-  }
+function calculatorResponseBlocks(answers: EstimateAnswers | null): SummaryBlock[] {
+  if (!answers) return [];
 
-  return "";
+  const selectedAnswers = answers.selectedAnswers;
+  const source = selectedAnswers && typeof selectedAnswers === "object" && !Array.isArray(selectedAnswers)
+    ? selectedAnswers
+    : answers;
+
+  return Object.entries(source)
+    .filter(([key]) => !["source", "selectedAnswers", "generatedEstimateSummary"].includes(key))
+    .map(([label, value]) => {
+      const readable = readableValue(value);
+      return {
+        label,
+        value: readable,
+        wide: readable.length > 60 || readable.includes("\n"),
+      };
+    })
+    .filter((item) => item.value);
+}
+
+function buildSubmittedSummary(values: FormValues, calculatorAnswers: EstimateAnswers | null): SubmittedSummary {
+  const estimateRange =
+    calculatorAnswers?.estimateLow && calculatorAnswers?.estimateHigh
+      ? `${calculatorAnswers.estimateLow} to ${calculatorAnswers.estimateHigh}`
+      : "";
+
+  return {
+    contact: [
+      { label: "Name", value: values.name },
+      { label: "Email", value: values.email },
+      { label: "Phone", value: values.phone },
+      { label: "Company / Business Name", value: values.company },
+    ].filter((item) => item.value),
+    estimate: [
+      { label: "Selected Service / Package", value: calculatorAnswers?.calculatorPathway || calculatorAnswers?.projectPathway || values.projectType },
+      { label: "Estimated Price / Range", value: estimateRange || values.budget },
+      { label: "Timeline / Urgency", value: values.timeline },
+      { label: "Project Type / Category", value: values.projectType },
+      {
+        label: "Monthly Care",
+        value: calculatorAnswers?.monthlyCarePrice
+          ? `${calculatorAnswers.monthlyCare || "Care Plan"} (${calculatorAnswers.monthlyCarePrice} per month)`
+          : calculatorAnswers?.monthlyCare || "",
+      },
+    ].filter((item) => item.value && item.value !== "Not Sure Yet"),
+    responses: calculatorResponseBlocks(calculatorAnswers),
+    message: values.message.trim() || noMessageText,
+  };
 }
 
 export function ContactForm() {
   const [values, setValues] = useState<FormValues>(initialValues);
   const [estimateSummary, setEstimateSummary] = useState("");
   const [calculatorAnswers, setCalculatorAnswers] = useState<EstimateAnswers | null>(null);
+  const [submittedSummary, setSubmittedSummary] = useState<SubmittedSummary | null>(null);
   const [status, setStatus] = useState<SubmitState>("idle");
   const [statusMessage, setStatusMessage] = useState("");
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 
   useEffect(() => {
-    const inquiry = window.sessionStorage.getItem("twixalotEstimateInquiry");
+    const enquiry = window.sessionStorage.getItem("twixalotEstimateInquiry");
     const answersRaw = window.sessionStorage.getItem("twixalotEstimateAnswers");
 
-    if (!inquiry) {
+    if (!enquiry && !answersRaw) {
       return;
     }
 
     const prefill = window.setTimeout(() => {
-      setEstimateSummary(inquiry);
-      setValues((current) => ({
-        ...current,
-        message: current.message || inquiry,
-      }));
+      setEstimateSummary(enquiry || "");
 
       if (!answersRaw) {
         return;
@@ -102,11 +173,11 @@ export function ContactForm() {
         setValues((current) => ({
           ...current,
           projectType: mappedProjectType && projectTypes.includes(mappedProjectType) ? mappedProjectType : current.projectType,
-          budget: budgetRanges.includes("Calculator estimate attached") ? "Calculator estimate attached" : current.budget,
+          budget: budgetRanges.includes("Calculator Estimate Attached") ? "Calculator Estimate Attached" : current.budget,
           timeline: mappedTimeline && timelineOptions.includes(mappedTimeline) ? mappedTimeline : current.timeline,
         }));
       } catch {
-        // Ignore malformed saved estimates. The readable estimate summary is still submitted.
+        // Ignore malformed saved estimates. The visible message remains reserved for the client's own note.
       }
     }, 0);
 
@@ -116,10 +187,7 @@ export function ContactForm() {
   const updateValue = (name: keyof FormValues, value: string) => {
     setValues((current) => ({ ...current, [name]: value }));
     setFieldErrors((current) => {
-      if (!current[name]) {
-        return current;
-      }
-
+      if (!current[name]) return current;
       const next = { ...current };
       delete next[name];
       return next;
@@ -134,6 +202,7 @@ export function ContactForm() {
 
     const source: ContactSource = estimateSummary || calculatorAnswers ? "pricing-calculator" : "direct-contact";
     const calculatorAnswersJson = calculatorAnswers ? JSON.stringify(calculatorAnswers) : "";
+    const summary = buildSubmittedSummary(values, calculatorAnswers);
 
     try {
       const response = await fetch("/api/contact", {
@@ -166,18 +235,25 @@ export function ContactForm() {
       window.sessionStorage.removeItem("twixalotEstimateInquiry");
       window.sessionStorage.removeItem("twixalotEstimateAnswers");
       setStatus("success");
-      setStatusMessage("Thanks. Your inquiry has been sent, and I will get back to you soon.");
+      setStatusMessage("Your enquiry was sent successfully. A confirmation email has been sent to you.");
+      setSubmittedSummary(summary);
       setValues(initialValues);
       setEstimateSummary("");
       setCalculatorAnswers(null);
     } catch {
       setStatus("error");
-      setStatusMessage("I could not send the message right now. Please try again in a moment.");
+      setStatusMessage("I could not send the enquiry right now. Please try again in a moment.");
     }
   };
 
   return (
-    <form className="grid gap-4" aria-label="Project inquiry form" onSubmit={handleSubmit}>
+    <form className="grid gap-4" aria-label="Project enquiry form" onSubmit={handleSubmit}>
+      {estimateSummary || calculatorAnswers ? (
+        <div className="rounded-[8px] border border-[rgba(11,79,217,0.34)] bg-[rgba(11,79,217,0.1)] p-4 text-sm leading-7 text-white/72">
+          Your estimate from the calculator has been noted. Please complete your contact details below and add any extra message you would like to send.
+        </div>
+      ) : null}
+
       <label className="absolute left-[-9999px] top-auto h-px w-px overflow-hidden">
         Leave this field empty
         <input
@@ -234,7 +310,7 @@ export function ContactForm() {
           />
         </label>
         <label className="grid gap-2 text-sm font-medium text-white/76">
-          Company / organisation
+          Company / Organisation
           <input
             name="company"
             type="text"
@@ -249,7 +325,7 @@ export function ContactForm() {
       <div className="grid gap-4 sm:grid-cols-3">
         <FieldError error={fieldErrors.projectType}>
           <label className="grid gap-2 text-sm font-medium text-white/76">
-            Project type
+            Project Type
             <select
               name="projectType"
               className="twix-input"
@@ -264,7 +340,7 @@ export function ContactForm() {
         </FieldError>
         <FieldError error={fieldErrors.budget}>
           <label className="grid gap-2 text-sm font-medium text-white/76">
-            Estimated budget or calculator range
+            Estimated Budget Or Calculator Range
             <select
               name="budget"
               className="twix-input"
@@ -296,12 +372,11 @@ export function ContactForm() {
 
       <FieldError error={fieldErrors.message}>
         <label className="grid gap-2 text-sm font-medium text-white/76">
-          Message
+          Additional Message
           <textarea
             name="message"
             rows={6}
             className="twix-input resize-y"
-            required
             value={values.message}
             onChange={(event) => updateValue("message", event.target.value)}
           />
@@ -321,12 +396,14 @@ export function ContactForm() {
         </p>
       ) : null}
 
+      {submittedSummary ? <SubmittedSummaryCard summary={submittedSummary} /> : null}
+
       <button
         type="submit"
         disabled={status === "submitting"}
         className="mt-2 inline-flex min-h-13 w-full items-center justify-center bg-white px-6 font-semibold text-[#03143c] transition hover:bg-[#e8eeff] disabled:cursor-wait disabled:opacity-70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-magenta)] sm:w-fit"
       >
-        {status === "submitting" ? "Sending..." : "Start a project"}
+        {status === "submitting" ? "Sending..." : "Send Enquiry"}
       </button>
     </form>
   );
@@ -338,5 +415,38 @@ function FieldError({ children, error }: { children: ReactNode; error?: string }
       {children}
       {error ? <p className="mt-2 text-xs leading-5 text-[var(--color-magenta)]">{error}</p> : null}
     </div>
+  );
+}
+
+function SubmittedSummaryCard({ summary }: { summary: SubmittedSummary }) {
+  return (
+    <div className="rounded-[8px] border border-white/10 bg-white/[0.045] p-5">
+      <h2 className="text-xl font-semibold text-white">Enquiry Summary</h2>
+      <p className="mt-2 text-sm leading-7 text-white/58">Here is a copy of the information that was submitted.</p>
+      <SummarySection title="Contact Details" blocks={summary.contact} />
+      <SummarySection title="Estimate Overview" blocks={summary.estimate} emptyText={noEstimateText} />
+      <SummarySection title="Calculator Responses" blocks={summary.responses} emptyText={noEstimateText} />
+      <SummarySection title="Additional Message" blocks={[{ label: "Message", value: summary.message, wide: true }]} />
+    </div>
+  );
+}
+
+function SummarySection({ title, blocks, emptyText }: { title: string; blocks: SummaryBlock[]; emptyText?: string }) {
+  return (
+    <section className="mt-5">
+      <h3 className="text-sm font-semibold uppercase tracking-[0.16em] text-white/42">{title}</h3>
+      {blocks.length > 0 ? (
+        <div className="mt-3 grid gap-3 sm:grid-cols-2">
+          {blocks.map((block) => (
+            <div key={`${title}-${block.label}`} className={`rounded-[8px] bg-[#050b1d]/72 p-4 ${block.wide ? "sm:col-span-2" : ""}`}>
+              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-white/38">{block.label}</p>
+              <p className="mt-2 whitespace-pre-line text-sm leading-6 text-white/72">{block.value}</p>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <p className="mt-3 rounded-[8px] bg-[#050b1d]/72 p-4 text-sm leading-6 text-white/58">{emptyText}</p>
+      )}
+    </section>
   );
 }

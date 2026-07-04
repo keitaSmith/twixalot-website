@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Twixalot | Premium Websites, Web Apps and Digital Systems",
   description:
-    "Twixalot is a Swiss-based freelance software studio building polished websites, web apps, CMS platforms and automations.",
+    "Twixalot is a Zurich, Switzerland-based freelance software studio building polished websites, web apps, CMS platforms and automations.",
   icons: {
     icon: "/logos/twixalot-logo-icon.svg",
   },

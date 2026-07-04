@@ -12,11 +12,10 @@ import {
   PlugZap,
   Sparkles,
 } from "lucide-react";
+import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
-import { Logo } from "@/components/Logo";
 import { PricingCalculator } from "@/components/pricing/PricingCalculator";
 import { PricingTierCard } from "@/components/pricing/PricingTierCard";
-import { navItems } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "Pricing | Twixalot",
@@ -60,7 +59,7 @@ const pricingTiers = [
     bestFor: ["Booking systems", "Dashboards", "Portals", "Workflow tools", "Internal admin systems", "API integrations"],
   },
   {
-    title: "Care and Support",
+    title: "Care And Support",
     price: "From CHF 290 per month",
     description:
       "Ongoing updates, small fixes, technical checks, content support and improvements after launch.",
@@ -71,42 +70,42 @@ const pricingTiers = [
 
 const priceFactors = [
   {
-    title: "Scope and page count",
+    title: "Scope And Page Count",
     description: "More pages usually mean more structure, design states, copy handling and review time.",
     icon: FileText,
   },
   {
-    title: "Design complexity",
+    title: "Design Complexity",
     description: "Custom visual systems, brand polish and detailed responsive work add depth to the design phase.",
     icon: Palette,
   },
   {
-    title: "CMS and content structure",
+    title: "CMS And Content Structure",
     description: "Editable pages, people, resources, events or media need clean content models and handover.",
     icon: Blocks,
   },
   {
-    title: "Animations and visual polish",
+    title: "Animations And Visual Polish",
     description: "Subtle motion can be lightweight, while cinematic interaction needs more careful build and testing.",
     icon: Sparkles,
   },
   {
-    title: "Integrations and automations",
+    title: "Integrations And Automations",
     description: "Forms, calendars, payments, APIs and workflow connections affect both build and QA effort.",
     icon: PlugZap,
   },
   {
-    title: "Content support",
+    title: "Content Support",
     description: "Final copy, rewriting, content planning and page population can materially change project scope.",
     icon: Languages,
   },
   {
-    title: "Timeline and launch pressure",
+    title: "Timeline And Launch Pressure",
     description: "Rush work compresses planning, review and testing, so it needs priority scheduling.",
     icon: Clock3,
   },
   {
-    title: "Training and ongoing support",
+    title: "Training And Ongoing Support",
     description: "Handover sessions, documentation and care plans keep the system useful after launch.",
     icon: LifeBuoy,
   },
@@ -115,7 +114,7 @@ const priceFactors = [
 const carePlans = [
   {
     title: "No Monthly Care",
-    subtitle: "Project handover only",
+    subtitle: "Project Handover Only",
     price: "CHF 0 per month",
     bestFor: "Finished websites that rarely change, or clients who prefer to request updates only when needed.",
     chooseIf: [
@@ -132,7 +131,7 @@ const carePlans = [
   },
   {
     title: "Basic Care",
-    subtitle: "Peace of mind for simple websites",
+    subtitle: "Peace Of Mind For Simple Websites",
     price: "CHF 290 per month",
     bestFor: "Small websites that need light ongoing support, occasional fixes and someone technical keeping an eye on things.",
     chooseIf: [
@@ -154,7 +153,7 @@ const carePlans = [
   },
   {
     title: "Standard Care",
-    subtitle: "Regular support for CMS websites",
+    subtitle: "Regular Support For CMS Websites",
     price: "CHF 490 per month",
     bestFor: "Websites and content platforms that need regular updates, CMS help, small improvements and more active support.",
     chooseIf: [
@@ -177,7 +176,7 @@ const carePlans = [
   },
   {
     title: "Growth Care",
-    subtitle: "Ongoing improvements for active platforms",
+    subtitle: "Ongoing Improvements For Active Platforms",
     price: "CHF 900 per month",
     bestFor: "Active websites and platforms that are used often, updated frequently or tied closely to business, community or operational goals.",
     chooseIf: [
@@ -210,7 +209,7 @@ export default function PricingPage() {
             <div className="twix-fade-up max-w-4xl">
               <p className="twix-eyebrow">Pricing</p>
               <h1 className="mt-6 max-w-5xl text-5xl font-semibold leading-[1.02] sm:text-6xl lg:text-7xl">
-                Clear starting points for serious digital projects.
+                Clear Starting Points For Serious Digital Projects
               </h1>
               <p className="mt-7 max-w-2xl text-lg leading-8 text-white/70">
                 Every project is different, but pricing should not feel mysterious. Use the calculator below to get a
@@ -240,8 +239,8 @@ export default function PricingPage() {
         <section className="relative py-12 sm:py-20">
           <div className="twix-container">
             <SectionIntro
-              label="Ways to start"
-              heading="Ways to start"
+              label="Ways To Start"
+              heading="Ways To Start"
               intro="These are calm starting points for different project shapes. The final scope is always confirmed around the real work, not a generic package."
             />
             <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-5">
@@ -257,8 +256,8 @@ export default function PricingPage() {
         <section id="pricing-calculator" className="relative scroll-mt-28 py-12 sm:py-20">
           <div className="twix-container">
             <SectionIntro
-              label="Estimate your project"
-              heading="Estimate your project"
+              label="Estimate Your Project"
+              heading="Estimate Your Project"
               intro="Answer a few questions and get a rough project range. The estimate is meant to help with planning. A final quote comes after a short discovery conversation."
             />
             <div className="mt-10">
@@ -270,8 +269,8 @@ export default function PricingPage() {
         <section className="relative py-12 sm:py-20">
           <div className="twix-container">
             <SectionIntro
-              label="Care and Support"
-              heading="Support after launch, matched to how active your site is."
+              label="Care And Support"
+              heading="Support After Launch, Matched To How Active Your Site Is"
               intro="Care plans are optional monthly support choices. They sit separately from the one-time project estimate and help cover small fixes, technical checks, content support and agreed improvements after launch."
             />
             <div className="mt-10 grid gap-5 lg:grid-cols-2">
@@ -306,7 +305,7 @@ export default function PricingPage() {
 
                     <div className="mt-6 grid gap-5 md:grid-cols-2">
                       <div>
-                        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/42">Choose this if</p>
+                        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/42">Choose This If</p>
                         <ul className="mt-3 grid gap-2">
                           {plan.chooseIf.slice(0, 4).map((item) => (
                             <li key={item} className="flex gap-2 text-xs leading-5 text-white/58">
@@ -353,8 +352,8 @@ export default function PricingPage() {
         <section className="relative py-12 sm:py-20">
           <div className="twix-container">
             <SectionIntro
-              label="Pricing factors"
-              heading="What affects the price?"
+              label="Pricing Factors"
+              heading="What Affects The Price?"
               intro="The biggest changes usually come from complexity, content, integrations and timeline pressure."
             />
             <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
@@ -393,7 +392,7 @@ export default function PricingPage() {
               <div className="relative max-w-4xl">
                 <p className="twix-eyebrow">Transparency</p>
                 <h2 className="mt-5 text-3xl font-semibold leading-tight sm:text-5xl">
-                  What is usually billed separately?
+                  What Is Usually Billed Separately?
                 </h2>
                 <p className="mt-6 text-base leading-8 text-white/66">
                   Domains, hosting, paid plugins, premium fonts, third-party tools, licences, payment provider fees and
@@ -413,7 +412,7 @@ export default function PricingPage() {
                 aria-hidden="true"
               />
               <div className="relative">
-                <h2 className="max-w-3xl text-3xl font-semibold leading-tight sm:text-5xl">Have a number in mind?</h2>
+                <h2 className="max-w-3xl text-3xl font-semibold leading-tight sm:text-5xl">Have A Number In Mind?</h2>
                 <p className="mt-5 max-w-2xl text-base leading-8 text-white/66">
                   Use the estimate as a starting point. If the range feels realistic, send a short message about what
                   you want to build and I can help turn it into a clearer scope.
@@ -442,37 +441,5 @@ function SectionIntro({ label, heading, intro }: { label: string; heading: strin
       <h2 className="mt-5 text-3xl font-semibold leading-tight sm:text-5xl">{heading}</h2>
       <p className="mt-5 text-base leading-8 text-white/62">{intro}</p>
     </div>
-  );
-}
-
-function Footer() {
-  return (
-    <footer className="border-t border-white/10 bg-[#01040e] py-12 text-white">
-      <div className="twix-container grid gap-10 lg:grid-cols-[1.2fr_0.8fr_0.8fr]">
-        <div>
-          <Logo />
-          <p className="mt-5 max-w-md text-sm leading-7 text-white/58">
-            Swiss-based freelance software studio for polished websites, web apps, CMS platforms and automations.
-          </p>
-        </div>
-        <nav className="grid grid-cols-2 gap-3 text-sm text-white/66">
-          {navItems.map((item) => (
-            <Link key={item.href} href={item.href} className="hover:text-white">
-              {item.label}
-            </Link>
-          ))}
-          <Link href="/impressum" className="hover:text-white">
-            Impressum
-          </Link>
-          <Link href="/privacy" className="hover:text-white">
-            Privacy Policy
-          </Link>
-        </nav>
-        <div className="text-sm leading-7 text-white/62">
-          <p>hello@twixalot.example</p>
-          <p>Switzerland</p>
-        </div>
-      </div>
-    </footer>
   );
 }

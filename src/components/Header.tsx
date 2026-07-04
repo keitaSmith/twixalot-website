@@ -128,7 +128,7 @@ export function Header() {
       </div>
       <div
         id="mobile-navigation"
-        className={`mx-auto w-[min(100%,var(--rail-width))] px-[calc(var(--rail-pad)*2)] transition lg:hidden ${
+        className={`twx-mobile-menu-wrap mx-auto w-[min(100%,var(--rail-width))] transition lg:hidden ${
           isMenuOpen ? "pointer-events-auto translate-y-0 opacity-100" : "pointer-events-none -translate-y-3 opacity-0"
         }`}
       >

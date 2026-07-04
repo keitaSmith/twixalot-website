@@ -286,7 +286,11 @@ html {
 
 @media (max-width: 1023px) {
   .twx-header-container {
-    padding-inline: calc(var(--rail-pad) * 2);
+    padding-inline: var(--rail-pad);
+  }
+
+  .twx-mobile-menu-wrap {
+    padding-inline: var(--rail-pad);
   }
 
   .twx-mobile-solid-pill.twx-pill-active {
@@ -324,6 +328,13 @@ html {
   .twx-header-cta-pill.twx-pill-active::before,
   .twx-header-cta-pill.twx-pill-active::after {
     opacity: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .twx-header-container,
+  .twx-mobile-menu-wrap {
+    padding-inline: calc(var(--rail-pad) * 2);
   }
 }
 

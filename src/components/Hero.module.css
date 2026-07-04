@@ -14,6 +14,7 @@
   width: 100%;
   object-fit: cover;
   object-position: 61% 50%;
+  pointer-events: none;
   filter: saturate(1.08) contrast(1.04) brightness(0.9);
   transform-origin: center;
 }
@@ -59,6 +60,7 @@
   opacity: 0;
   pointer-events: none;
   translate: -50% -50%;
+  visibility: hidden;
   perspective: 1200px;
 }
 
@@ -68,6 +70,7 @@
   z-index: 8;
   opacity: 0;
   pointer-events: none;
+  visibility: hidden;
   transform-style: preserve-3d;
   perspective: 1200px;
 }
@@ -102,6 +105,7 @@
 
 .interactiveLayer {
   pointer-events: auto !important;
+  visibility: visible !important;
 }
 
 .interactiveLayer .featuredContent {
@@ -110,6 +114,20 @@
 
 .interactiveLayer .pathContent,
 .interactiveLayer .processContent {
+  pointer-events: auto;
+}
+
+.copyContent a,
+.serviceReveal a,
+.pathReveal a,
+.featuredReveal a,
+.processReveal a {
+  position: relative;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.interactiveLayer a {
   pointer-events: auto;
 }
 
@@ -123,6 +141,7 @@
   z-index: 9;
   opacity: 0;
   pointer-events: none;
+  visibility: hidden;
   transform-style: preserve-3d;
   perspective: 1200px;
 }
@@ -133,6 +152,7 @@
   z-index: 11;
   opacity: 0;
   pointer-events: none;
+  visibility: hidden;
   transform-style: preserve-3d;
   perspective: 1200px;
 }
@@ -635,16 +655,6 @@
   font-size: 0.82rem;
 }
 
-.proofRow {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.55rem 0.8rem;
-  margin-top: 1rem;
-  color: rgba(255, 255, 255, 0.66);
-  font-size: 0.86rem;
-  line-height: 1.7;
-}
-
 @media (max-height: 760px) and (min-width: 768px) {
   .serviceReveal {
     max-width: 68rem;
@@ -677,11 +687,6 @@
     font-size: 0.78rem;
     line-height: 1.38;
   }
-}
-
-.proofRow span:first-child {
-  color: rgba(255, 255, 255, 0.92);
-  font-weight: 650;
 }
 
 .revealBand {
@@ -722,6 +727,7 @@
     translate: none;
     opacity: 1 !important;
     pointer-events: auto;
+    visibility: visible;
   }
 
   .serviceGrid {
@@ -747,6 +753,7 @@
     margin-top: 4rem;
     opacity: 1 !important;
     pointer-events: auto;
+    visibility: visible;
     transform: none !important;
     filter: none !important;
   }
@@ -776,6 +783,7 @@
     z-index: 9;
     opacity: 1 !important;
     pointer-events: auto;
+    visibility: visible;
     transform: none !important;
     filter: none !important;
   }
@@ -805,6 +813,7 @@
   .serviceReveal * {
     opacity: 1 !important;
     pointer-events: auto;
+    visibility: visible;
     transform: none !important;
   }
 
@@ -822,6 +831,7 @@
     z-index: 9;
     opacity: 1 !important;
     pointer-events: auto;
+    visibility: visible;
     transform: none !important;
     filter: none !important;
   }
@@ -848,6 +858,7 @@
     z-index: 9;
     opacity: 1 !important;
     pointer-events: auto;
+    visibility: visible;
     transform: none !important;
     filter: none !important;
   }

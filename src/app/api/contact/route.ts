@@ -24,6 +24,7 @@ type ContactPayload = {
   monthlyCarePrice?: unknown;
   calculatorAnswers?: unknown;
   generatedEstimateSummary?: unknown;
+  formStartedAt?: unknown;
 };
 
 type CalculatorAnswers = Record<string, unknown>;
@@ -37,6 +38,27 @@ type SummaryBlock = {
 const allowedSources = ["direct-contact", "pricing-calculator"] as const;
 const noMessageText = "No additional message was provided.";
 const noEstimateText = "No calculator estimate was provided.";
+const genericErrorMessage = "I could not send the enquiry right now. Please try again in a moment.";
+const rateLimitWindowMs = 10 * 60 * 1000;
+const rateLimitMax = 3;
+const minSubmitTimeMs = 1500;
+const maxLengths = {
+  name: 120,
+  email: 254,
+  phone: 40,
+  company: 160,
+  projectType: 80,
+  budget: 80,
+  timeline: 80,
+  message: 4000,
+  calculatorPathway: 120,
+  estimate: 60,
+  monthlyCare: 120,
+  generatedEstimateSummary: 4000,
+  calculatorAnswers: 10000,
+} as const;
+
+const rateLimitStore = new Map<string, { count: number; resetAt: number }>();
 
 const trimString = (value: unknown) => (typeof value === "string" ? value.trim() : "");
 
@@ -50,6 +72,55 @@ const escapeHtml = (value: string) =>
 
 const isValidEmail = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 const isAllowed = (value: string, options: readonly string[]) => value === "" || options.includes(value);
+const isTooLong = (value: string, maxLength: number) => value.length > maxLength;
+const hasUnsafeControlCharacters = (value: string) => /[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/.test(value);
+
+const genericError = (status = 400) => Response.json({ message: genericErrorMessage }, { status });
+
+const getClientIp = (request: Request) => {
+  const forwardedFor = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
+  return (
+    request.headers.get("cf-connecting-ip")?.trim() ||
+    request.headers.get("x-real-ip")?.trim() ||
+    forwardedFor ||
+    "unknown"
+  );
+};
+
+const isSameOriginRequest = (request: Request) => {
+  const origin = request.headers.get("origin");
+  const host = request.headers.get("host");
+
+  if (!origin || !host) return true;
+
+  try {
+    return new URL(origin).host === host;
+  } catch {
+    return false;
+  }
+};
+
+const isRateLimited = (key: string) => {
+  const now = Date.now();
+  const current = rateLimitStore.get(key);
+
+  if (!current || current.resetAt <= now) {
+    rateLimitStore.set(key, { count: 1, resetAt: now + rateLimitWindowMs });
+    return false;
+  }
+
+  current.count += 1;
+  rateLimitStore.set(key, current);
+  return current.count > rateLimitMax;
+};
+
+const serializedLength = (value: unknown) => {
+  try {
+    return JSON.stringify(value).length;
+  } catch {
+    return Number.POSITIVE_INFINITY;
+  }
+};
 
 const labelFromKey = (key: string) =>
   key
@@ -232,8 +303,8 @@ const sendEmail = async ({
   subject: string;
   html: string;
   text: string;
-}) =>
-  fetch(resendEndpoint, {
+}) => {
+  const response = await fetch(resendEndpoint, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${apiKey}`,
@@ -249,8 +320,30 @@ const sendEmail = async ({
     }),
   });
 
+  let data: unknown = null;
+
+  try {
+    data = await response.json();
+  } catch {
+    data = null;
+  }
+
+  return {
+    ok: response.ok,
+    status: response.status,
+    data,
+  };
+};
+
 export async function POST(request: Request) {
   let payload: ContactPayload;
+
+  const contentType = request.headers.get("content-type") || "";
+  const userAgent = request.headers.get("user-agent") || "";
+
+  if (!contentType.toLowerCase().includes("application/json") || !userAgent.trim() || !isSameOriginRequest(request)) {
+    return genericError();
+  }
 
   try {
     payload = (await request.json()) as ContactPayload;
@@ -260,6 +353,17 @@ export async function POST(request: Request) {
 
   if (trimString(payload.honeypot)) {
     return Response.json({ ok: true });
+  }
+
+  const submittedAt = Date.now();
+  const formStartedAt = typeof payload.formStartedAt === "number" ? payload.formStartedAt : Number(trimString(payload.formStartedAt));
+
+  if (Number.isFinite(formStartedAt) && formStartedAt > 0 && submittedAt - formStartedAt < minSubmitTimeMs) {
+    return Response.json({ ok: true });
+  }
+
+  if (isRateLimited(getClientIp(request))) {
+    return genericError(429);
   }
 
   const name = trimString(payload.name);
@@ -278,16 +382,37 @@ export async function POST(request: Request) {
   const estimateHigh = trimString(payload.estimateHigh);
   const monthlyCare = trimString(payload.monthlyCare);
   const monthlyCarePrice = trimString(payload.monthlyCarePrice);
+  const generatedEstimateSummary = trimString(payload.generatedEstimateSummary);
+  const calculatorAnswersLength = serializedLength(payload.calculatorAnswers);
   const calculatorAnswers = parseCalculatorAnswers(payload.calculatorAnswers);
 
   const errors: Record<string, string> = {};
 
   if (!name) errors.name = "Please enter your name.";
   if (!email || !isValidEmail(email)) errors.email = "Please enter a valid email address.";
+  if (isTooLong(name, maxLengths.name) || hasUnsafeControlCharacters(name)) errors.name = "Please enter a valid name.";
+  if (isTooLong(email, maxLengths.email) || hasUnsafeControlCharacters(email)) errors.email = "Please enter a valid email address.";
+  if (phone && (isTooLong(phone, maxLengths.phone) || hasUnsafeControlCharacters(phone) || !/^[+()\d\s.-]+$/.test(phone))) errors.phone = "Please enter a valid phone number.";
+  if (company && (isTooLong(company, maxLengths.company) || hasUnsafeControlCharacters(company))) errors.company = "Please enter a valid company or organisation.";
   if (!isAllowed(projectType, projectTypes)) errors.projectType = "Please choose a valid project type.";
   if (!isAllowed(budget, budgetRanges)) errors.budget = "Please choose a valid budget range.";
   if (!isAllowed(timeline, timelineOptions)) errors.timeline = "Please choose a valid timeline.";
   if (!allowedSources.includes(source as (typeof allowedSources)[number])) errors.source = "Please use a valid source.";
+  if (isTooLong(projectType, maxLengths.projectType) || hasUnsafeControlCharacters(projectType)) errors.projectType = "Please choose a valid project type.";
+  if (isTooLong(budget, maxLengths.budget) || hasUnsafeControlCharacters(budget)) errors.budget = "Please choose a valid budget range.";
+  if (isTooLong(timeline, maxLengths.timeline) || hasUnsafeControlCharacters(timeline)) errors.timeline = "Please choose a valid timeline.";
+  if (message && (isTooLong(message, maxLengths.message) || hasUnsafeControlCharacters(message))) errors.message = "Please enter a shorter message.";
+  if (calculatorPathway && (isTooLong(calculatorPathway, maxLengths.calculatorPathway) || hasUnsafeControlCharacters(calculatorPathway))) errors.calculatorPathway = "Please use a valid estimate.";
+  if (estimateLow && (isTooLong(estimateLow, maxLengths.estimate) || hasUnsafeControlCharacters(estimateLow))) errors.estimateLow = "Please use a valid estimate.";
+  if (estimateHigh && (isTooLong(estimateHigh, maxLengths.estimate) || hasUnsafeControlCharacters(estimateHigh))) errors.estimateHigh = "Please use a valid estimate.";
+  if (monthlyCare && (isTooLong(monthlyCare, maxLengths.monthlyCare) || hasUnsafeControlCharacters(monthlyCare))) errors.monthlyCare = "Please use a valid care option.";
+  if (monthlyCarePrice && (isTooLong(monthlyCarePrice, maxLengths.estimate) || hasUnsafeControlCharacters(monthlyCarePrice))) errors.monthlyCarePrice = "Please use a valid care price.";
+  if (generatedEstimateSummary && (isTooLong(generatedEstimateSummary, maxLengths.generatedEstimateSummary) || hasUnsafeControlCharacters(generatedEstimateSummary))) {
+    errors.generatedEstimateSummary = "Please use a valid estimate summary.";
+  }
+  if (calculatorAnswersLength > maxLengths.calculatorAnswers || (payload.calculatorAnswers && !calculatorAnswers)) {
+    errors.calculatorAnswers = "Please use valid calculator answers.";
+  }
 
   if (Object.keys(errors).length > 0) {
     return Response.json({ message: "Please check the highlighted fields.", errors }, { status: 400 });
@@ -322,7 +447,7 @@ export async function POST(request: Request) {
 
   const responseBlocks = formatCalculatorResponses(calculatorAnswers);
   const messageBlocks: SummaryBlock[] = [{ label: "Additional Message", value: message || noMessageText, wide: true }];
-  const submittedAt = new Date().toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: "Europe/Zurich" });
+  const submittedAtLabel = new Date().toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: "Europe/Zurich" });
 
   const internalSections = [
     section("Contact Details", contactBlocks),
@@ -336,7 +461,7 @@ export async function POST(request: Request) {
     heading: "New Twixalot Enquiry",
     intro: "A new enquiry has been submitted through the Twixalot website.",
     sections: internalSections,
-    footer: `Submitted ${submittedAt}. Source: ${sourceLabel}. The estimate came from the website calculator when calculator details are present.`,
+    footer: `Submitted ${submittedAtLabel}. Source: ${sourceLabel}. The estimate came from the website calculator when calculator details are present.`,
   });
   const clientHtml = emailShell({
     heading: "Thank You For Your Enquiry",
@@ -368,12 +493,21 @@ export async function POST(request: Request) {
       replyTo: email,
       subject: `New website enquiry from ${name}`,
       html: internalHtml,
-      text: `New Twixalot enquiry\n\nA new enquiry has been submitted through the Twixalot website.\n\n${summaryText}\n\nSubmitted: ${submittedAt}\nSource: ${sourceLabel}`,
+      text: `New Twixalot enquiry\n\nA new enquiry has been submitted through the Twixalot website.\n\n${summaryText}\n\nSubmitted: ${submittedAtLabel}\nSource: ${sourceLabel}`,
     });
 
     if (!internalResponse.ok) {
+      console.error("Twixalot internal enquiry email failed", {
+        status: internalResponse.status,
+        data: internalResponse.data,
+      });
       return Response.json({ message: "I could not send the enquiry right now. Please try again in a moment." }, { status: 502 });
     }
+
+    console.info("Twixalot internal enquiry email accepted", {
+      recipient,
+      data: internalResponse.data,
+    });
 
     const clientResponse = await sendEmail({
       apiKey,
@@ -386,8 +520,17 @@ export async function POST(request: Request) {
     });
 
     if (!clientResponse.ok) {
+      console.error("Twixalot client confirmation email failed", {
+        status: clientResponse.status,
+        data: clientResponse.data,
+      });
       return Response.json({ message: "Your enquiry reached Twixalot, but the confirmation email could not be sent. Please contact me directly if you need a copy." }, { status: 502 });
     }
+
+    console.info("Twixalot client confirmation email accepted", {
+      recipient: email,
+      data: clientResponse.data,
+    });
 
     // TODO: Update the Privacy Policy to mention Resend once contact email sending is active.
     return Response.json({ ok: true });

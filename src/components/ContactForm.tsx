@@ -1,7 +1,7 @@
 "use client";
 
 import type { FormEvent, ReactNode } from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { budgetRanges, projectTypes, timelineOptions } from "@/data/site";
 
 type EstimateAnswers = {
@@ -31,19 +31,6 @@ type FormValues = {
   honeypot: string;
 };
 
-type SummaryBlock = {
-  label: string;
-  value: string;
-  wide?: boolean;
-};
-
-type SubmittedSummary = {
-  contact: SummaryBlock[];
-  estimate: SummaryBlock[];
-  responses: SummaryBlock[];
-  message: string;
-};
-
 type ContactSource = "direct-contact" | "pricing-calculator";
 type SubmitState = "idle" | "submitting" | "success" | "error";
 
@@ -59,9 +46,6 @@ const initialValues: FormValues = {
   honeypot: "",
 };
 
-const noMessageText = "No additional message was provided.";
-const noEstimateText = "No calculator estimate was provided.";
-
 function timelineFromEstimate(value?: string) {
   if (!value) return "";
   if (value === "Flexible Timeline") return "Flexible";
@@ -70,86 +54,18 @@ function timelineFromEstimate(value?: string) {
   return "";
 }
 
-function readableValue(value: unknown): string {
-  if (Array.isArray(value)) {
-    return value.filter(Boolean).map(String).join("\n");
-  }
-
-  if (value === null || value === undefined || value === "") {
-    return "";
-  }
-
-  if (typeof value === "object") {
-    return Object.entries(value as Record<string, unknown>)
-      .map(([key, entry]) => `${key}: ${readableValue(entry)}`)
-      .filter(Boolean)
-      .join("\n");
-  }
-
-  return String(value);
-}
-
-function calculatorResponseBlocks(answers: EstimateAnswers | null): SummaryBlock[] {
-  if (!answers) return [];
-
-  const selectedAnswers = answers.selectedAnswers;
-  const source = selectedAnswers && typeof selectedAnswers === "object" && !Array.isArray(selectedAnswers)
-    ? selectedAnswers
-    : answers;
-
-  return Object.entries(source)
-    .filter(([key]) => !["source", "selectedAnswers", "generatedEstimateSummary"].includes(key))
-    .map(([label, value]) => {
-      const readable = readableValue(value);
-      return {
-        label,
-        value: readable,
-        wide: readable.length > 60 || readable.includes("\n"),
-      };
-    })
-    .filter((item) => item.value);
-}
-
-function buildSubmittedSummary(values: FormValues, calculatorAnswers: EstimateAnswers | null): SubmittedSummary {
-  const estimateRange =
-    calculatorAnswers?.estimateLow && calculatorAnswers?.estimateHigh
-      ? `${calculatorAnswers.estimateLow} to ${calculatorAnswers.estimateHigh}`
-      : "";
-
-  return {
-    contact: [
-      { label: "Name", value: values.name },
-      { label: "Email", value: values.email },
-      { label: "Phone", value: values.phone },
-      { label: "Company / Business Name", value: values.company },
-    ].filter((item) => item.value),
-    estimate: [
-      { label: "Selected Service / Package", value: calculatorAnswers?.calculatorPathway || calculatorAnswers?.projectPathway || values.projectType },
-      { label: "Estimated Price / Range", value: estimateRange || values.budget },
-      { label: "Timeline / Urgency", value: values.timeline },
-      { label: "Project Type / Category", value: values.projectType },
-      {
-        label: "Monthly Care",
-        value: calculatorAnswers?.monthlyCarePrice
-          ? `${calculatorAnswers.monthlyCare || "Care Plan"} (${calculatorAnswers.monthlyCarePrice} per month)`
-          : calculatorAnswers?.monthlyCare || "",
-      },
-    ].filter((item) => item.value && item.value !== "Not Sure Yet"),
-    responses: calculatorResponseBlocks(calculatorAnswers),
-    message: values.message.trim() || noMessageText,
-  };
-}
-
 export function ContactForm() {
   const [values, setValues] = useState<FormValues>(initialValues);
   const [estimateSummary, setEstimateSummary] = useState("");
   const [calculatorAnswers, setCalculatorAnswers] = useState<EstimateAnswers | null>(null);
-  const [submittedSummary, setSubmittedSummary] = useState<SubmittedSummary | null>(null);
   const [status, setStatus] = useState<SubmitState>("idle");
   const [statusMessage, setStatusMessage] = useState("");
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+  const formStartedAt = useRef(0);
 
   useEffect(() => {
+    formStartedAt.current = Date.now();
+
     const enquiry = window.sessionStorage.getItem("twixalotEstimateInquiry");
     const answersRaw = window.sessionStorage.getItem("twixalotEstimateAnswers");
 
@@ -194,6 +110,17 @@ export function ContactForm() {
     });
   };
 
+  const clearEstimate = () => {
+    window.sessionStorage.removeItem("twixalotEstimateInquiry");
+    window.sessionStorage.removeItem("twixalotEstimateAnswers");
+    setEstimateSummary("");
+    setCalculatorAnswers(null);
+    setValues((current) => ({
+      ...current,
+      budget: current.budget === "Calculator Estimate Attached" ? "Not Sure Yet" : current.budget,
+    }));
+  };
+
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setStatus("submitting");
@@ -202,7 +129,6 @@ export function ContactForm() {
 
     const source: ContactSource = estimateSummary || calculatorAnswers ? "pricing-calculator" : "direct-contact";
     const calculatorAnswersJson = calculatorAnswers ? JSON.stringify(calculatorAnswers) : "";
-    const summary = buildSubmittedSummary(values, calculatorAnswers);
 
     try {
       const response = await fetch("/api/contact", {
@@ -218,6 +144,7 @@ export function ContactForm() {
           monthlyCarePrice: calculatorAnswers?.monthlyCarePrice || "",
           calculatorAnswers: calculatorAnswersJson,
           generatedEstimateSummary: calculatorAnswers?.generatedEstimateSummary || estimateSummary,
+          formStartedAt: formStartedAt.current,
         }),
       });
       const result = (await response.json()) as {
@@ -235,8 +162,7 @@ export function ContactForm() {
       window.sessionStorage.removeItem("twixalotEstimateInquiry");
       window.sessionStorage.removeItem("twixalotEstimateAnswers");
       setStatus("success");
-      setStatusMessage("Your enquiry was sent successfully. A confirmation email has been sent to you.");
-      setSubmittedSummary(summary);
+      setStatusMessage("Thank you. I received your enquiry and will get back to you soon.");
       setValues(initialValues);
       setEstimateSummary("");
       setCalculatorAnswers(null);
@@ -249,8 +175,17 @@ export function ContactForm() {
   return (
     <form className="grid gap-4" aria-label="Project enquiry form" onSubmit={handleSubmit}>
       {estimateSummary || calculatorAnswers ? (
-        <div className="rounded-[8px] border border-[rgba(11,79,217,0.34)] bg-[rgba(11,79,217,0.1)] p-4 text-sm leading-7 text-white/72">
-          Your estimate from the calculator has been noted. Please complete your contact details below and add any extra message you would like to send.
+        <div className="rounded-[8px] border border-[rgba(11,79,217,0.34)] bg-[rgba(11,79,217,0.1)] p-4 text-sm leading-7 text-white/72 sm:flex sm:items-start sm:justify-between sm:gap-4">
+          <p>
+            Your estimate from the calculator has been noted. Please complete your contact details below and add any extra message you would like to send.
+          </p>
+          <button
+            type="button"
+            onClick={clearEstimate}
+            className="mt-3 inline-flex min-h-10 shrink-0 items-center justify-center border border-white/18 px-4 text-sm font-semibold text-white transition hover:border-white/42 hover:bg-white/[0.06] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-electric)] sm:mt-0"
+          >
+            Clear estimate
+          </button>
         </div>
       ) : null}
 
@@ -340,7 +275,7 @@ export function ContactForm() {
         </FieldError>
         <FieldError error={fieldErrors.budget}>
           <label className="grid gap-2 text-sm font-medium text-white/76">
-            Estimated Budget Or Calculator Range
+            Budget/Estimate
             <select
               name="budget"
               className="twix-input"
@@ -396,8 +331,6 @@ export function ContactForm() {
         </p>
       ) : null}
 
-      {submittedSummary ? <SubmittedSummaryCard summary={submittedSummary} /> : null}
-
       <button
         type="submit"
         disabled={status === "submitting"}
@@ -415,38 +348,5 @@ function FieldError({ children, error }: { children: ReactNode; error?: string }
       {children}
       {error ? <p className="mt-2 text-xs leading-5 text-[var(--color-magenta)]">{error}</p> : null}
     </div>
-  );
-}
-
-function SubmittedSummaryCard({ summary }: { summary: SubmittedSummary }) {
-  return (
-    <div className="rounded-[8px] border border-white/10 bg-white/[0.045] p-5">
-      <h2 className="text-xl font-semibold text-white">Enquiry Summary</h2>
-      <p className="mt-2 text-sm leading-7 text-white/58">Here is a copy of the information that was submitted.</p>
-      <SummarySection title="Contact Details" blocks={summary.contact} />
-      <SummarySection title="Estimate Overview" blocks={summary.estimate} emptyText={noEstimateText} />
-      <SummarySection title="Calculator Responses" blocks={summary.responses} emptyText={noEstimateText} />
-      <SummarySection title="Additional Message" blocks={[{ label: "Message", value: summary.message, wide: true }]} />
-    </div>
-  );
-}
-
-function SummarySection({ title, blocks, emptyText }: { title: string; blocks: SummaryBlock[]; emptyText?: string }) {
-  return (
-    <section className="mt-5">
-      <h3 className="text-sm font-semibold uppercase tracking-[0.16em] text-white/42">{title}</h3>
-      {blocks.length > 0 ? (
-        <div className="mt-3 grid gap-3 sm:grid-cols-2">
-          {blocks.map((block) => (
-            <div key={`${title}-${block.label}`} className={`rounded-[8px] bg-[#050b1d]/72 p-4 ${block.wide ? "sm:col-span-2" : ""}`}>
-              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-white/38">{block.label}</p>
-              <p className="mt-2 whitespace-pre-line text-sm leading-6 text-white/72">{block.value}</p>
-            </div>
-          ))}
-        </div>
-      ) : (
-        <p className="mt-3 rounded-[8px] bg-[#050b1d]/72 p-4 text-sm leading-6 text-white/58">{emptyText}</p>
-      )}
-    </section>
   );
 }

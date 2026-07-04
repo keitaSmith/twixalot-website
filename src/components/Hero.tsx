@@ -72,10 +72,10 @@ export function Hero() {
       const syncInteractiveLayers = () => {
         const layerEntries = [
           { element: copy.current, threshold: 0.28 },
-          { element: reveal.current, threshold: 0.28 },
-          { element: featured.current, threshold: 0.28 },
-          { element: paths.current, threshold: 0.28 },
-          { element: process.current, threshold: 0.28 },
+          { element: reveal.current, threshold: 0.85 },
+          { element: featured.current, threshold: 0.85 },
+          { element: paths.current, threshold: 0.85 },
+          { element: process.current, threshold: 0.85 },
         ];
 
         layerEntries.forEach(({ element, threshold }) => {
@@ -215,7 +215,7 @@ export function Hero() {
           <p className="mt-6 max-w-2xl text-base leading-7 text-white/76 sm:text-xl sm:leading-8">
             Twixalot designs and builds polished websites, web apps, CMS platforms and automations for businesses, nonprofits and creative brands.
           </p>
-          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+          <div className="relative z-20 mt-9 flex flex-col gap-3 sm:flex-row">
             <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
               <Link
                 href="/contact"
@@ -259,16 +259,7 @@ export function Hero() {
             ))}
           </div>
 
-          <div data-hero-reveal className={styles.proofRow}>
-            <span>Selected builds:</span>
-            <span>Animae Caribe</span>
-            <span>Pride TT</span>
-            <span>TTCSI / NSEP</span>
-            <span>PMATT</span>
-            <span>QICU</span>
-          </div>
-
-          <div data-hero-reveal className="mt-5 flex flex-col gap-3 sm:flex-row">
+          <div data-hero-reveal className="relative z-20 mt-5 flex flex-col gap-3 sm:flex-row">
             <Link
               href="/contact"
               className="inline-flex min-h-12 items-center justify-center gap-2 bg-white px-5 font-semibold text-[#03143c] transition hover:bg-[#e8eeff] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-magenta)]"

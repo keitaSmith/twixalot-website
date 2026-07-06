@@ -174,7 +174,7 @@ export const servicePages: ServicePageData[] = [
       {
         question: "Can the booking system take payments?",
         answer:
-          "Yes. Online payments can be included when the project requires them, depending on the payment provider and workflow.",
+          "Yes. Online payments are possible when the project requires them, depending on the payment provider and workflow.",
       },
       {
         question: "Can it connect to calendars or email tools?",

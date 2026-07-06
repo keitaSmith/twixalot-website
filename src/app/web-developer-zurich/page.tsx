@@ -5,7 +5,7 @@ import { ArrowRight, Check } from "lucide-react";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { JsonLd } from "@/components/JsonLd";
-import { createPageMetadata, faqJsonLd, serviceJsonLd } from "@/data/seo";
+import { createPageMetadata, faqJsonLd, ogImage, serviceJsonLd, siteName } from "@/data/seo";
 
 const path = "/web-developer-zurich";
 
@@ -31,9 +31,9 @@ const faqs = [
       "Yes. Twixalot can build booking flows, structured enquiry forms, product catalogues, online shops, payment-ready experiences and custom workflows depending on the project scope.",
   },
   {
-    question: "Can you support German search terms like Website erstellen lassen in Zürich?",
+    question: "Do you support German-speaking clients and Swiss search terms?",
     answer:
-      "Yes. German search wording such as Website erstellen lassen in Zürich, Webdesign für KMU, Webentwickler in Zürich or Webdesigner in Zürich can be included naturally where it helps Swiss clients understand the service.",
+      "Yes. Twixalot can structure website content for English and German-speaking audiences in Switzerland. This Zurich page and related service pages include natural search wording such as Website erstellen lassen in Zürich, Webdesign für KMU, Webentwickler in Zürich and Webdesigner in Zürich where it helps clients understand the service.",
   },
   {
     question: "Can I get an estimate before contacting you?",
@@ -100,8 +100,8 @@ const buildOptions = [
 
 const situations = [
   "You have an outdated website that no longer reflects the quality of your business.",
-  "You rely on Instagram, WhatsApp, or word of mouth but need a proper website people can trust.",
-  "You need clients to book appointments, send enquiries, or request quotes online.",
+  "You rely on Instagram, WhatsApp or word of mouth but need a proper website people can trust.",
+  "You need clients to book appointments, send enquiries or request quotes online.",
   "You want to launch a small online shop or product catalogue.",
   "You need a website that works in English and German.",
   "You need ongoing technical support instead of being left alone after launch.",
@@ -138,12 +138,51 @@ const processSteps = [
   },
 ];
 
-export const metadata: Metadata = createPageMetadata({
-  title: "Web Developer Zurich | Websites, Apps & Digital Systems",
-  description:
-    "Twixalot builds websites, redesigns, booking systems, e-commerce platforms, and custom digital tools for small businesses, organisations, and growing projects in Zurich, Switzerland, and beyond.",
-  path,
-});
+export const metadata: Metadata = {
+  ...createPageMetadata({
+    title: "Web Developer Zurich | Websites, Apps & Digital Systems",
+    description:
+      "Twixalot builds websites, redesigns, booking systems, e-commerce platforms, and custom digital tools for small businesses, organisations, and growing projects in Zurich, Switzerland, and beyond.",
+    path,
+  }),
+  title: {
+    absolute: "Web Developer Zurich | Websites, Apps & Digital Systems | Twixalot",
+  },
+  keywords: [
+    "web developer Zurich",
+    "freelance web developer Zurich",
+    "web designer Zurich",
+    "web design Zurich",
+    "Website erstellen lassen in Zürich",
+    "Webentwickler in Zürich",
+    "Webdesigner in Zürich",
+    "Webdesign für KMU",
+  ],
+  openGraph: {
+    title: "Web Developer Zurich | Websites, Apps & Digital Systems | Twixalot",
+    description:
+      "Twixalot builds websites, redesigns, booking systems, e-commerce platforms, and custom digital tools for small businesses, organisations, and growing projects in Zurich, Switzerland, and beyond.",
+    url: path,
+    siteName,
+    images: [
+      {
+        url: ogImage,
+        width: 1200,
+        height: 630,
+        alt: "Twixalot Software Solutions - websites, apps and digital systems for small businesses, organisations and growing projects",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Web Developer Zurich | Websites, Apps & Digital Systems | Twixalot",
+    description:
+      "Twixalot builds websites, redesigns, booking systems, e-commerce platforms, and custom digital tools for small businesses, organisations, and growing projects in Zurich, Switzerland, and beyond.",
+    images: [ogImage],
+  },
+};
 
 export default function WebDeveloperZurichPage() {
   return (

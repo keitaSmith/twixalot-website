@@ -162,7 +162,7 @@ export default function ServicesPage() {
             <SectionIntro
               label="Dedicated Services"
               heading="Explore The Core Service Pages"
-              intro="Each service page explains who it is for, what can be included, typical use cases, process and practical FAQs."
+              intro="Each service page explains who it is for, possible scope, typical use cases, process and practical FAQs."
             />
             <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
               {servicePages.map((service) => (

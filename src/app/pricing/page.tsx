@@ -260,6 +260,10 @@ export default function PricingPage() {
               heading="Estimate Your Project"
               intro="Answer a few questions and get a rough project range. The estimate is meant to help with planning. A final quote comes after a short discovery conversation."
             />
+            <p className="mt-6 max-w-3xl rounded-[8px] border border-white/10 bg-white/[0.04] p-4 text-sm leading-7 text-white/58">
+              This calculator provides a rough, non-binding estimate. Final pricing may be lower or higher depending on
+              the exact project scope, content, timeline, integrations, and technical requirements.
+            </p>
             <div className="mt-10">
               <PricingCalculator />
             </div>

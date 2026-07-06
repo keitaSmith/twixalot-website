@@ -1,6 +1,6 @@
 import type { Metadata, MetadataRoute } from "next";
 
-export const siteUrl = "https://twixalot.com";
+export const siteUrl = "https://www.twixalot.com";
 export const siteName = "Twixalot Software Solutions";
 export const defaultTitle = "Twixalot Software Solutions | Websites, Apps & Digital Systems";
 export const defaultDescription =

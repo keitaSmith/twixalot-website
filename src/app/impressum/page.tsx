@@ -19,7 +19,7 @@ const sections = [
       "Switzerland",
       "Phone: +41 76 324 51 00",
       "keita.smith@twixalot.com",
-      "https://twixalot.com",
+      "https://www.twixalot.com",
     ],
   },
   {

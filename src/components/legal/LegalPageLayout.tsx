@@ -65,7 +65,7 @@ export function LegalPageLayout({ title, intro, sections }: LegalPageLayoutProps
 
 function renderLegalText(text: string) {
   const email = "keita.smith@twixalot.com";
-  const website = "https://twixalot.com";
+  const website = "https://www.twixalot.com";
 
   if (text === email) {
     return (

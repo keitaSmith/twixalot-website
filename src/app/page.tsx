@@ -12,7 +12,7 @@ import { createPageMetadata, faqJsonLd } from "@/data/seo";
 export const metadata = createPageMetadata({
   title: "Websites, Apps & Digital Systems for Small Businesses",
   description:
-    "Twixalot builds fast websites, booking systems, e-commerce platforms, mobile apps and custom digital tools for small businesses and organisations in Zurich, Switzerland and beyond.",
+    "Twixalot builds websites, apps, booking systems, e-commerce platforms, and custom digital tools for small businesses, organisations, and growing projects in Zurich, Switzerland, and beyond.",
   path: "/",
 });
 

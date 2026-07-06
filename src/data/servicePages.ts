@@ -22,15 +22,15 @@ export const servicePages: ServicePageData[] = [
     title: "Website Design & Development",
     metaTitle: "Website Design & Web Development Zurich",
     metaDescription:
-      "Custom website design and web development for small businesses, SMEs, organisations and growing projects in Zurich and Switzerland.",
-    h1: "Custom Websites For Small Businesses And Swiss SMEs",
+      "Custom website design and web development for small businesses, organisations and growing projects in Zurich, Switzerland and beyond.",
+    h1: "Custom Websites For Small Businesses And Growing Projects",
     eyebrow: "Website Design",
     intro:
       "Twixalot designs and builds fast, responsive websites that make your offer clear, feel credible on mobile and desktop, and give your business a stronger digital foundation.",
     audience: "Small businesses, SMEs, organisations, NGOs, startups and creators",
     whoFor: [
       "Small businesses that need a professional website instead of a generic template.",
-      "Zurich and Swiss SMEs that want clear web design, strong structure and reliable implementation.",
+      "Zurich-area businesses and Swiss organisations that want clear web design, strong structure and reliable implementation.",
       "Organisations, NGOs and creators that need content, events, services or campaigns presented clearly.",
     ],
     included: [
@@ -86,11 +86,11 @@ export const servicePages: ServicePageData[] = [
     eyebrow: "E-Commerce",
     intro:
       "Twixalot builds e-commerce websites and product-focused web experiences that help small businesses present products clearly, support payments or enquiries, and create a smoother buying path.",
-    audience: "Small shops, product businesses, creators and Swiss SMEs",
+    audience: "Small shops, product businesses, creators and growing teams",
     whoFor: [
       "Small businesses that want to sell products or services online.",
       "Creators and brands that need a polished product catalogue.",
-      "Swiss SMEs that need a clearer online-shop foundation before adding more integrations.",
+      "Swiss businesses and growing teams that need a clearer online-shop foundation before adding more integrations.",
     ],
     included: [
       "Product catalogue or storefront structure",

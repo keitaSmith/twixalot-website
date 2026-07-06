@@ -4,7 +4,7 @@ export const siteUrl = "https://twixalot.com";
 export const siteName = "Twixalot Software Solutions";
 export const defaultTitle = "Twixalot Software Solutions | Websites, Apps & Digital Systems";
 export const defaultDescription =
-  "Twixalot builds fast websites, mobile apps, e-commerce platforms, booking systems, and custom digital systems for small businesses, SMEs, organisations, and growing projects in Zurich, Switzerland, and beyond.";
+  "Twixalot builds websites, apps, booking systems, e-commerce platforms, and custom digital systems for small businesses, organisations, and growing projects in Zurich, Switzerland, and beyond.";
 export const fullLogoImage = "/logos/twixalot-logo.png";
 export const iconImage = "/logos/twixalot-logo-icon.png";
 export const ogImage = "/og-image.png";
@@ -36,7 +36,7 @@ export function createPageMetadata({ title, description, path }: SeoMetadataInpu
           url: ogImage,
           width: 1200,
           height: 630,
-          alt: "Twixalot Software Solutions - websites, apps and digital systems for Swiss SMEs",
+          alt: "Twixalot Software Solutions - websites, apps and digital systems for small businesses, organisations and growing projects",
         },
       ],
       locale: "en_US",

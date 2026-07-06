@@ -56,7 +56,7 @@ export const metadata: Metadata = {
         url: ogImage,
         width: 1200,
         height: 630,
-        alt: "Twixalot Software Solutions - websites, apps and digital systems for Swiss SMEs",
+        alt: "Twixalot Software Solutions - websites, apps and digital systems for small businesses, organisations and growing projects",
       },
     ],
     locale: "en_US",

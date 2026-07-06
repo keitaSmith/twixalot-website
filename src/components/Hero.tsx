@@ -224,14 +224,15 @@ export function Hero() {
       <div className={`twix-container relative z-10 grid min-h-screen items-center pb-16 pt-28 lg:pt-28 ${styles.heroContentShell}`}>
         <div ref={copy} className={`max-w-3xl ${styles.copyContent} ${styles.interactiveLayer}`}>
           <p className="mb-5 inline-flex items-center gap-2 bg-white/[0.055] px-3 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-white/72 backdrop-blur-xl">
-            Zurich, Switzerland Software Studio
+            Zurich Region, Switzerland & Beyond
           </p>
           <h1 className="max-w-3xl text-balance text-3xl font-semibold leading-[1.05] text-white sm:text-5xl lg:text-6xl 2xl:text-7xl">
             Websites, Apps & Digital Systems For Small Businesses
           </h1>
           <p className="mt-6 max-w-2xl text-base leading-7 text-white/76 sm:text-xl sm:leading-8">
-            Twixalot helps small businesses, organisations and growing projects in Zurich, Switzerland and beyond build
-            fast websites, booking systems, e-commerce platforms, mobile apps and custom digital tools.
+            Twixalot builds websites, apps, booking systems, e-commerce platforms, and custom digital tools for small
+            businesses, organisations, and growing projects. Based in the Zurich region and working with clients across
+            Switzerland and beyond.
           </p>
           <div className="relative z-20 mt-9 flex flex-col gap-3 sm:flex-row">
             <motion.div className="w-full sm:w-auto" whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>

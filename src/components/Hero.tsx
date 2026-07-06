@@ -227,10 +227,11 @@ export function Hero() {
             Zurich, Switzerland Software Studio
           </p>
           <h1 className="max-w-3xl text-balance text-3xl font-semibold leading-[1.05] text-white sm:text-5xl lg:text-6xl 2xl:text-7xl">
-            Digital Products With A Little Magic And A Lot Of Engineering
+            Websites, Apps & Digital Systems For Small Businesses
           </h1>
           <p className="mt-6 max-w-2xl text-base leading-7 text-white/76 sm:text-xl sm:leading-8">
-            Twixalot designs and builds polished websites, web apps, CMS platforms and automations for businesses, nonprofits and creative brands.
+            Twixalot helps small businesses, organisations and growing projects in Zurich, Switzerland and beyond build
+            fast websites, booking systems, e-commerce platforms, mobile apps and custom digital tools.
           </p>
           <div className="relative z-20 mt-9 flex flex-col gap-3 sm:flex-row">
             <motion.div className="w-full sm:w-auto" whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
@@ -244,12 +245,26 @@ export function Hero() {
             </motion.div>
             <motion.div className="w-full sm:w-auto" whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
               <Link
-                href="/pricing#pricing-calculator"
+                href="/pricing#estimate-calculator"
                 className="inline-flex min-h-13 items-center justify-center border border-white/18 px-6 font-semibold text-white transition hover:border-white/42 hover:bg-white/[0.06] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-electric)]"
               >
                 Get an estimate
               </Link>
             </motion.div>
+          </div>
+          <div className="mt-6 flex flex-wrap gap-x-5 gap-y-3 text-sm font-semibold text-white/68">
+            <Link href="/services/websites" className="underline decoration-white/20 underline-offset-8 transition hover:text-white hover:decoration-[var(--color-magenta)]">
+              Website design
+            </Link>
+            <Link href="/services/ecommerce" className="underline decoration-white/20 underline-offset-8 transition hover:text-white hover:decoration-[var(--color-magenta)]">
+              E-commerce websites
+            </Link>
+            <Link href="/services/booking-systems" className="underline decoration-white/20 underline-offset-8 transition hover:text-white hover:decoration-[var(--color-magenta)]">
+              Booking systems
+            </Link>
+            <Link href="/web-developer-zurich" className="underline decoration-white/20 underline-offset-8 transition hover:text-white hover:decoration-[var(--color-magenta)]">
+              Web developer Zurich
+            </Link>
           </div>
         </div>
 
@@ -376,7 +391,7 @@ export function Hero() {
 
           <div data-path-reveal className="mt-6">
             <Link
-              href="/pricing#pricing-calculator"
+              href="/pricing#estimate-calculator"
               className="inline-flex min-h-12 items-center justify-center gap-2 bg-white px-5 font-semibold text-[#03143c] transition hover:bg-[#e8eeff] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-magenta)]"
             >
               Estimate your project

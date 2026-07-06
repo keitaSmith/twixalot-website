@@ -1,7 +1,16 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ContactForm } from "@/components/ContactForm";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { createPageMetadata } from "@/data/seo";
+
+export const metadata: Metadata = createPageMetadata({
+  title: "Contact Twixalot",
+  description:
+    "Contact Twixalot Software Solutions to discuss a website, mobile app, e-commerce platform, booking system, SEO improvement or custom digital project.",
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (

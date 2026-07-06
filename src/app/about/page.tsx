@@ -6,12 +6,14 @@ import { SiBlender, SiUnrealengine } from "react-icons/si";
 import { ConstellationMorph } from "@/components/ConstellationMorph";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { createPageMetadata } from "@/data/seo";
 
-export const metadata: Metadata = {
-  title: "About | Twixalot",
+export const metadata: Metadata = createPageMetadata({
+  title: "About Keita Smith & Twixalot",
   description:
     "Meet Keita Smith, the developer and creative technologist behind Twixalot, a Zurich-based software studio for websites, content platforms and digital systems.",
-};
+  path: "/about",
+});
 
 const buildTags = [
   "Websites",
@@ -89,7 +91,7 @@ export default function AboutPage() {
             <div className="twix-fade-up relative min-h-[18rem]">
               <div className="relative flex min-h-[18rem] items-center justify-center">
                 <Image
-                  src="/logos/twixalot-logo-icon.svg"
+                  src="/logos/twixalot-logo-icon.png"
                   alt="Twixalot wizard hat logo icon"
                   width={320}
                   height={320}

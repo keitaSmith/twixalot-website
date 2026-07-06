@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { LegalPageLayout } from "@/components/legal/LegalPageLayout";
+import { createPageMetadata } from "@/data/seo";
 
-export const metadata: Metadata = {
-  title: "Impressum / Legal Notice | Twixalot",
+export const metadata: Metadata = createPageMetadata({
+  title: "Impressum / Legal Notice",
   description: "Legal notice and operator information for Twixalot.",
-};
+  path: "/impressum",
+});
 
 const sections = [
   {

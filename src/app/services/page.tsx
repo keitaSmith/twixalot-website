@@ -12,13 +12,16 @@ import {
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { processOverview, processSteps } from "@/data/processSteps";
+import { servicePages } from "@/data/servicePages";
 import { startingPoints } from "@/data/site";
+import { createPageMetadata } from "@/data/seo";
 
-export const metadata: Metadata = {
-  title: "Services | Twixalot",
+export const metadata: Metadata = createPageMetadata({
+  title: "Web Design, Development & Digital Services",
   description:
-    "Twixalot services for polished websites, content-managed platforms, custom web systems and ongoing support.",
-};
+    "Twixalot services for web design, web development, e-commerce, booking systems, mobile apps, SEO, website maintenance and custom digital systems in Zurich and Switzerland.",
+  path: "/services",
+});
 
 const buildServices = [
   {
@@ -150,6 +153,33 @@ export default function ServicesPage() {
                   </article>
                 );
               })}
+            </div>
+          </div>
+        </section>
+
+        <section className="relative py-12 sm:py-20">
+          <div className="twix-container">
+            <SectionIntro
+              label="Dedicated Services"
+              heading="Explore The Core Service Pages"
+              intro="Each service page explains who it is for, what can be included, typical use cases, process and practical FAQs."
+            />
+            <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+              {servicePages.map((service) => (
+                <Link
+                  key={service.slug}
+                  href={`/services/${service.slug}`}
+                  className="group rounded-[8px] border border-white/10 bg-white/[0.04] p-5 transition hover:border-white/24 hover:bg-white/[0.065] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-electric)]"
+                >
+                  <p className="twix-eyebrow">{service.eyebrow}</p>
+                  <h3 className="mt-4 text-xl font-semibold leading-tight text-white">{service.title}</h3>
+                  <p className="mt-4 text-sm leading-7 text-white/60">{service.metaDescription}</p>
+                  <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-white">
+                    View service
+                    <ArrowRight aria-hidden="true" size={16} />
+                  </span>
+                </Link>
+              ))}
             </div>
           </div>
         </section>

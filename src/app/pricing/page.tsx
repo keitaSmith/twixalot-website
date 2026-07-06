@@ -16,12 +16,14 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { PricingCalculator } from "@/components/pricing/PricingCalculator";
 import { PricingTierCard } from "@/components/pricing/PricingTierCard";
+import { createPageMetadata } from "@/data/seo";
 
-export const metadata: Metadata = {
-  title: "Pricing | Twixalot",
+export const metadata: Metadata = createPageMetadata({
+  title: "Pricing & Project Estimate Calculator",
   description:
     "Transparent starting points and a project estimate calculator for Twixalot websites, content platforms and custom digital systems.",
-};
+  path: "/pricing",
+});
 
 const pricingTiers = [
   {
@@ -253,7 +255,7 @@ export default function PricingPage() {
           </div>
         </section>
 
-        <section id="pricing-calculator" className="relative scroll-mt-28 py-12 sm:py-20">
+        <section id="estimate-calculator" className="relative scroll-mt-28 py-12 sm:py-20">
           <div className="twix-container">
             <SectionIntro
               label="Estimate Your Project"

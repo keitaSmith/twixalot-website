@@ -5,13 +5,15 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { WebsiteProjectCard } from "@/components/work/WebsiteProjectCard";
 import { WebsiteProjectGrid } from "@/components/work/WebsiteProjectGrid";
+import { createPageMetadata } from "@/data/seo";
 import { websiteProjects } from "@/data/websiteProjects";
 
-export const metadata: Metadata = {
-  title: "Website Work | Twixalot",
+export const metadata: Metadata = createPageMetadata({
+  title: "Website Work & Portfolio",
   description:
     "Website projects by Twixalot across modern React builds, content platforms, business websites, community sites and e-commerce.",
-};
+  path: "/work",
+});
 
 export default function WorkPage() {
   const modernProjects = websiteProjects.filter((project) => project.group === "modern");

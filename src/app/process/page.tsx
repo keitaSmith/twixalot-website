@@ -1,6 +1,15 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { createPageMetadata } from "@/data/seo";
+
+export const metadata: Metadata = createPageMetadata({
+  title: "Process",
+  description:
+    "How Twixalot plans, designs, builds and launches websites, content platforms, booking systems and custom digital tools.",
+  path: "/process",
+});
 
 export default function ProcessPage() {
   return (

@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { LegalPageLayout } from "@/components/legal/LegalPageLayout";
+import { createPageMetadata } from "@/data/seo";
 
-export const metadata: Metadata = {
-  title: "Privacy Policy / Datenschutzerklärung | Twixalot",
+export const metadata: Metadata = createPageMetadata({
+  title: "Privacy Policy / Datenschutzerklärung",
   description: "Privacy information for the Twixalot website and contact form.",
-};
+  path: "/privacy",
+});
 
 const sections = [
   {

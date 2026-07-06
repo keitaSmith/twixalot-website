@@ -5,7 +5,7 @@ import { useState } from "react";
 import { homeFaqItems } from "@/data/homeFaqs";
 import styles from "./FAQSection.module.css";
 
-const calculatorHref = "/pricing#pricing-calculator";
+const calculatorHref = "/pricing#estimate-calculator";
 
 export function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);

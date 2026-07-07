@@ -253,20 +253,6 @@ export function Hero() {
               </Link>
             </motion.div>
           </div>
-          <div className="mt-6 flex flex-wrap gap-x-5 gap-y-3 text-sm font-semibold text-white/68">
-            <Link href="/services/websites" className="underline decoration-white/20 underline-offset-8 transition hover:text-white hover:decoration-[var(--color-magenta)]">
-              Website design
-            </Link>
-            <Link href="/services/ecommerce" className="underline decoration-white/20 underline-offset-8 transition hover:text-white hover:decoration-[var(--color-magenta)]">
-              E-commerce websites
-            </Link>
-            <Link href="/services/booking-systems" className="underline decoration-white/20 underline-offset-8 transition hover:text-white hover:decoration-[var(--color-magenta)]">
-              Booking systems
-            </Link>
-            <Link href="/web-developer-zurich" className="underline decoration-white/20 underline-offset-8 transition hover:text-white hover:decoration-[var(--color-magenta)]">
-              Web developer Zurich
-            </Link>
-          </div>
         </div>
 
         <div ref={reveal} className={styles.serviceReveal}>
